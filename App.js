@@ -98,6 +98,7 @@ export default class App extends React.Component {
     if (receivedData.request == "getWIFIData") {
       var networks = receivedData["data"];
       if (receivedData["router"] != "") {
+        // @TODO not working 
         var index = networks.indexOf(receivedData["router"])
         console.log("index");
         console.log(index);
@@ -109,10 +110,14 @@ export default class App extends React.Component {
           networks[index] = tmp
         }
       }
-      this.setState({
-        networks: networks,
-        activity: false
-      })
+      if(networks.length > 0){
+        this.setState({
+          networks: networks,
+          network: networks[0],
+          activity: false
+        })
+      }
+      
     }
     if (receivedData.request == "setWIFIData") {
       // @ToDo if connected ok or fail

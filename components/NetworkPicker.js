@@ -18,7 +18,7 @@ export default class NetworkPicker extends React.Component {
         
         if (networks != undefined & networks.length >= 1) {
             if (networks.length >= 1 & this.state.network == ""){
-                this.props.getNetwork(networks[0])
+                // this.props.getNetwork(networks[0])
             }
                 
             return (

@@ -31,7 +31,7 @@ export default class Scan extends React.Component {
 
     connectToDevice(device).then(() => {
       console.log("Connected!");
-      Alert.alert('Підключено до ферми успішно!')
+      // Alert.alert('Підключено до ферми успішно!')
       this.props.enableEditing()
       var data = {
         "request":"getWIFIData"
@@ -66,7 +66,7 @@ export default class Scan extends React.Component {
       console.log("in promise");
 
       console.log(devices);
-      if (devices.length != 0){
+      if (devices.length > 0){
         this.setState({
           devices: devices,
           device: devices[0].address,
