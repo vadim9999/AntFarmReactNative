@@ -1866,6 +1866,11 @@ domexception@^1.0.1:
   dependencies:
     webidl-conversions "^4.0.2"
 
+easy-bluetooth-classic@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/easy-bluetooth-classic/-/easy-bluetooth-classic-1.0.4.tgz#95e17a504a10fabfeda9e98301acab7d79eab33d"
+  integrity sha512-/2VajdZba2FRMKzPk8jDhsvgLSbsO1qoRidi158uiItTfYHFP6Y+A+CXerqASYkL5OEMbQGift2KrtxHU4UZCg==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
