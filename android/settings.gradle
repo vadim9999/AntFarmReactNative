@@ -1,3 +1,5 @@
 rootProject.name = 'AntFarmReactNative'
+include ':easy-bluetooth-classic'
+project(':easy-bluetooth-classic').projectDir = new File(rootProject.projectDir, '../node_modules/easy-bluetooth-classic/android')
 
 include ':app'
