@@ -52,6 +52,9 @@ export default class Scan extends React.Component {
   //     console.log(data);
   //   }
   onScan() {
+    // this.setState({
+    //     activity:true
+    // })
 
     if (this.state.activity != true) {
       this.setState({

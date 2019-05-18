@@ -32,7 +32,7 @@ function  onStartScan(){
         for (var i = 0, len = devices.length; i < len; i++)
           obj[devices[i]['address']] = devices[i];
 
-        result = new Array();
+        var result = new Array();
         for (var address in obj)
           result.push(obj[address]);
         // console.log(result);
