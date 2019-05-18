@@ -11,16 +11,7 @@ export default class Loader extends React.Component {
     modalVisible: this.props.loading,
   };
 
-  // closeModal() {
-  //   this.setState({modalVisible:false});
-  // }
-
   render(){
-    // const {
-    //   loading,
-    //   ...attributes
-    // } = this.props;
-
     return (
       <Modal
         transparent={true}
