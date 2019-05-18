@@ -8,40 +8,13 @@ export default class DevicePicker extends React.Component {
         this.state = {
             device: "",
             activity: true,
-            devices :[]
-
+            devices: []
         }
-        
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.props.devices === nextProps.number) {
-    //         return false;
-    //       } else {
-    //         return true;
-    //       }
-    //   }
-
     getListOfDevices(devices) {
-        console.log("getListOfDevices");
-        // if (this.state.devices != this.props.devices){
-        console.log("selected value of device");
-        console.log(this.state.device);
-        
-        
-        
-        
+       
         if (devices != undefined && devices.length > 0) {
-            // if (devices.length >= 1 & this.state.device == ""){
-            //     this.props.getItem(devices[0].address)
-            // }
-            // if(this.state.device === ""){
-            //     console.log("________________________THis is ");
-                
-            //     this.setState({
-            //         device:devices[0]
-            //     })
-            // }
 
             return (
                 devices.map(device => {
@@ -50,33 +23,27 @@ export default class DevicePicker extends React.Component {
                         pair = "Пара"
                     }
                     if (device != undefined & device.name != undefined)
-                        return <Picker.Item key = {uuidv1} label={device.name + " " + device.address + " " + pair} value={device.address} />
+                        return <Picker.Item key={uuidv1} label={device.name + " " + device.address + " " + pair} value={device.address} />
                     else if (device != undefined & device.address != undefined) {
-                        return <Picker.Item key = {uuidv1} label={"NoName" + " " + device.address} value={device.address} />
-                    } else return <Picker.Item key = {uuidv1} label={""} value={""} />
+                        return <Picker.Item key={uuidv1} label={"NoName" + " " + device.address} value={device.address} />
+                    } else return <Picker.Item key={uuidv1} label={""} value={""} />
                 }
                 ))
         }
-    // }
-        // var devices = ["pi","samsung"];
-
     }
-    
+
     render() {
         return (
-
             <Picker
                 selectedValue={this.state.device}
                 style={{ height: 50, width: 100 }}
                 onValueChange={(itemValue, itemIndex) => {
-            console.log("Changed values");
-            this.setState({device: itemValue})
-            this.props.getItem(itemValue)
-        }}>
+                    this.setState({ device: itemValue })
+                    this.props.getItem(itemValue)
+                }}>
                 {this.getListOfDevices(this.props.devices)}
 
             </Picker>
-
 
         )
     }

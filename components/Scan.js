@@ -20,8 +20,6 @@ export default class Scan extends React.Component {
 
   componentWillMount() {
     this.onScan()
-    // bindListeners(this)
-    // this.onDeviceFoundEvent = EasyBluetooth.addOnDeviceFoundListener(this.onDeviceFound.bind(this));
   }
 
   onConnect() {
@@ -31,30 +29,19 @@ export default class Scan extends React.Component {
 
     connectToDevice(device).then(() => {
       console.log("Connected!");
-      // Alert.alert('Підключено до ферми успішно!')
       this.props.enableEditing()
       var data = {
-        "request":"getWIFIData"
+        "request": "getWIFIData"
       }
       writeToDevice(JSON.stringify(data))
-      // writeToDevice("getWIFIData")
-      console.log(device);
+     
     }).catch((ex) => {
       Alert.alert('Сталася помилка при підключенні до ферми')
       console.warn(ex);
     })
   }
-  // onDataRead(data) {
-  //     console.log("onDataRead");
-  //     if ("OK" == data) {
-  //       console.log("Data is received");
-  //     }
-  //     console.log(data);
-  //   }
+
   onScan() {
-    // this.setState({
-    //     activity:true
-    // })
 
     if (this.state.activity != true) {
       this.setState({
@@ -63,44 +50,33 @@ export default class Scan extends React.Component {
     }
 
     onStartScan().then(function (devices) {
-      console.log("in promise");
 
-      
-      if (devices != undefined && devices.length > 0){
+      if (devices != undefined && devices.length > 0) {
         this.setState({
           devices: devices,
           device: devices[0].address,
           activity: false
         })
       }
-      else{
+      else {
         this.setState({
           activity: false
         })
       }
-      
+
     }.bind(this)
     )
       .catch(function (ex) {
         console.warn(ex);
       });
-
-
   }
-
-  
-
 
   getItem(itemValue) {
-    var device = this.state.devices.find(device => {
-      return device.address == itemValue
-    })
-    // this.props.getDevice(device)
     this.setState({ device: itemValue })
   }
-  render() {
-    // console.log(this.state);
 
+  render() {
+   
     return (
       <View style={styles.scan_block}>
         <Text>Виберіть ферму</Text>
@@ -112,6 +88,7 @@ export default class Scan extends React.Component {
           <ActivityIndicator animating={this.state.activity} size="small" color="#0000ff" />
         </View>
         <View style={styles.button_block}>
+
           <View style={styles.buttons}>
             <Button
               onPress={this.onScan}
@@ -119,9 +96,9 @@ export default class Scan extends React.Component {
               title="Сканувати"
               color="#87CEEB"
               accessibilityLabel="Learn more about this purple button"
-
             />
           </View>
+
           <View style={styles.buttons}>
             <Button
               onPress={this.onConnect}
@@ -129,8 +106,8 @@ export default class Scan extends React.Component {
               title="Підключитися"
               color="#87CEEB"
               accessibilityLabel="Learn more about this purple button"
-
             />
+
           </View>
         </View>
       </View>
@@ -139,26 +116,21 @@ export default class Scan extends React.Component {
 }
 
 const styles = StyleSheet.create({
- 
+
   picker_activity: {
     flexDirection: 'row'
   },
   button_block: {
     flexDirection: 'row',
-    // justifyContent: 'center',
   },
   buttons: {
-    // flex:3,
     backgroundColor: 'steelblue',
     width: '50%'
-    // marginTop:'4%'
   },
   scan_block: {
     paddingTop: '8%',
     flex: 1,
-    // justifyContent: "center",
     height: 50,
-    // backgroundColor: 'skyblue', 
     justifyContent: "center"
   }
 });
