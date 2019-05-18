@@ -97,35 +97,40 @@ export default class App extends React.Component {
 
     if (receivedData.request == "getWIFIData") {
       var networks = receivedData["data"];
-      if (receivedData["router"] != "") {
+
+      if (receivedData["router"] !== "") {
         // @TODO not working 
         var index = networks.indexOf(receivedData["router"])
-        console.log("index");
-        console.log(index);
+        
 
 
-        if (index != -1) {
+        if (index > 0) {
           var tmp = networks[0]
           networks[0] = networks[index] + " підключено"
           networks[index] = tmp
+        }else if(index == 0) {
+          networks[0] += " підключено"
         }
       }
-      if(networks.length > 0){
+      
+      
+      if(networks != undefined &&  networks.length > 0){
         this.setState({
           networks: networks,
           network: networks[0],
           activity: false
         })
       }
+
       
     }
     if (receivedData.request == "setWIFIData") {
       // @ToDo if connected ok or fail
-      console.log(receivedData["ipAddress"]);
+      
       if (receivedData["ipAddress"] != "FAIL") {
         
         this.setState({
-          network: "",
+          // network: "",
           routerPassword: "",
           visiblePassword: false,
           activity: false,
@@ -137,6 +142,10 @@ export default class App extends React.Component {
           activity: false
         })
       }
+      var data = {
+        "request": "getWIFIData"
+      }
+      writeToDevice(JSON.stringify(data))
     }
 
     if (receivedData.request == "getIP") {
@@ -150,7 +159,7 @@ export default class App extends React.Component {
     // if ("OK" == data) {
     //   console.log("Data is received");
     // }
-    console.log(data);
+    
   }
   enableEditing() {
     this.setState({
@@ -164,7 +173,7 @@ export default class App extends React.Component {
     })
   }
   render() {
-    console.log("activity");
+    
     // console.log(this.state.activity);
     {/* <View style={{right:'50%', top:'50%', position:'absolute'}}>
         {/* <ActivityIndicator animating={this.state.activity} size="large" color="#0000ff" /> */}

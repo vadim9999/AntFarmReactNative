@@ -52,9 +52,6 @@ export default class Scan extends React.Component {
   //     console.log(data);
   //   }
   onScan() {
-    // this.setState({
-    //     activity:true
-    // })
 
     if (this.state.activity != true) {
       this.setState({
@@ -65,16 +62,16 @@ export default class Scan extends React.Component {
     onStartScan().then(function (devices) {
       console.log("in promise");
 
-      console.log(devices);
-      if (devices.length > 0){
+      
+      if (devices != undefined && devices.length > 0){
         this.setState({
           devices: devices,
           device: devices[0].address,
           activity: false
         })
-      }else{
+      }
+      else{
         this.setState({
-          devices: devices,
           activity: false
         })
       }

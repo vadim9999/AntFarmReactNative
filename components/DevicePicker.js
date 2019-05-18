@@ -25,14 +25,24 @@ export default class DevicePicker extends React.Component {
     getListOfDevices(devices) {
         console.log("getListOfDevices");
         // if (this.state.devices != this.props.devices){
-        console.log("NotEqual");
+        console.log("selected value of device");
+        console.log(this.state.device);
         
         
-        if (devices != undefined) {
+        
+        
+        if (devices != undefined && devices.length > 0) {
             // if (devices.length >= 1 & this.state.device == ""){
             //     this.props.getItem(devices[0].address)
             // }
+            // if(this.state.device === ""){
+            //     console.log("________________________THis is ");
                 
+            //     this.setState({
+            //         device:devices[0]
+            //     })
+            // }
+
             return (
                 devices.map(device => {
                     var pair = "";
