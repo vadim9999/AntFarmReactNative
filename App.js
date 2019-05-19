@@ -160,7 +160,7 @@ export default class App extends React.Component {
               {() =>
                 (<View>
 
-                  <Text>Виберіть wifi мережу</Text>
+                  <Text style={{fontSize:20}}>Виберіть wifi мережу</Text>
                   <NetworkPicker getNetwork={this.getNetwork}
                     networks={this.state.networks}
                     enabled={this.state.editable}

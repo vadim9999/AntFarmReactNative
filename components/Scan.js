@@ -79,7 +79,7 @@ export default class Scan extends React.Component {
    
     return (
       <View style={styles.scan_block}>
-        <Text>Виберіть ферму</Text>
+        <Text style={{fontSize:20}}>Виберіть ферму</Text>
         <View style={styles.picker_activity}>
           <DevicePicker
             getItem={this.getItem}
