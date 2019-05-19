@@ -10,9 +10,10 @@ import image from "./background/83.png"
 
 export default class MainScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Notifications',
+    drawerLabel: 'Головна',
     
   };
+
   constructor(props) {
     super(props);
     this.state = {
