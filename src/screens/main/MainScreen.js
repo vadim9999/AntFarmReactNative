@@ -5,6 +5,7 @@ import Scan from "../../components/Scan"
 import { init, writeToDevice } from "../../selector/selector"
 import KeyboardShift from '../../components/KeyboardShift';
 import NetworkPicker from '../../components/NetworkPicker';
+import DisplayPassword from '../../components/DisplayPassword';
 import Loader from '../../components/Loader';
 import image from "./background/83.png"
 
@@ -31,7 +32,7 @@ export default class MainScreen extends React.Component {
     this.onGetIP = this.onGetIP.bind(this)
     this.onChangeActivity = this.onChangeActivity.bind(this)
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this)
-   
+    this.onDisplayPassword = this.onDisplayPassword.bind(this)
   }
 
   componentWillMount() {
@@ -43,6 +44,11 @@ export default class MainScreen extends React.Component {
     this.onDataReadEvent.remove();
   }
 
+  onDisplayPassword(){
+    this.setState({
+      visiblePassword: !this.state.visiblePassword
+  })
+  }
   onSend() {
     var data = {
       "request": "setWIFIData",
@@ -180,24 +186,13 @@ export default class MainScreen extends React.Component {
                     placeholder="Введіть пароль роутера"
                     placeholderTextColor="black"
                   />
-
+                  
                   <View >
-                    <View style={{ flexDirection: 'column' }}>
-                      <View style={{ flexDirection: 'row' }}>
-                        <CheckBox
+                    <DisplayPassword 
+                    visiblePassword={this.state.visiblePassword} 
+                    editable={this.state.editable}
+                    onDisplayPassword = {this.onDisplayPassword}/>
 
-                          value={this.state.visiblePassword}
-                          disabled={!this.state.editable}
-                          onValueChange={() => {
-                            this.setState({
-                              visiblePassword: !this.state.visiblePassword
-                            }
-                            )
-                          }}
-                        />
-                        <Text style={{ marginTop: 5 }}> Показати пароль</Text>
-                      </View>
-                    </View>
                     <View style={styles.buttons}>
                     <Button
                       style={styles.buttons}
