@@ -12,6 +12,7 @@ import ButtonRefreshWIFI from '../../components/ButtonRefreshWIFI';
 import Loader from '../../components/Loader';
 import image from "./background/83.png"
 
+import styles from "./styles"
 export default class MainScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Головна',
@@ -160,7 +161,7 @@ export default class MainScreen extends React.Component {
   render() {
     
     return (
-      <ImageBackground source={image} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={image} style={styles.imageBackground}>
       <View style={styles.container}>
 
         <Loader
@@ -206,7 +207,7 @@ export default class MainScreen extends React.Component {
                       disabled={!this.state.editable}
                     />
                     </View>
-                    
+
                     <ButtonGetIP onGetIP = {this.onGetIP} editable= {this.state.editable} />
                     <ButtonRefreshWIFI onRefreshWIFI={this.onRefreshWIFI} editable= {this.state.editable}/>
                     
@@ -225,30 +226,4 @@ export default class MainScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  buttons: {
-    marginTop: 15,
-  },
-  scan_block: {
-    flex: 1,
-    height: 50,
-    justifyContent: "center"
-  },
-  wifi_form: {
-    flex: 2
-  },
-  textInput: {
-    height: 40,
-    borderBottomColor: 'black',
-    borderBottomWidth: 2,
-    margin: 12,
-    color: 'green'
-  },
-  content: {
-    flex: 1,
-    margin: '4%'
-  }
-});
+
