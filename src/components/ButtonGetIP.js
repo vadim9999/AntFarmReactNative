@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox } from 'react-native';
+import { StyleSheet, Button, View } from 'react-native';
 
 
 export default class ButtonGetIP extends React.Component {
