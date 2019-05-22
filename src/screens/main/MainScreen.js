@@ -8,6 +8,7 @@ import NetworkPicker from '../../components/NetworkPicker';
 import DisplayPassword from '../../components/DisplayPassword';
 import ButtonGetIP from '../../components/ButtonGetIP';
 import ButtonRefreshWIFI from '../../components/ButtonRefreshWIFI';
+import InputPassword from '../../components/InputPassword';
 
 import Loader from '../../components/Loader';
 import image from "./background/83.png"
@@ -25,7 +26,8 @@ export default class MainScreen extends React.Component {
       network: "",
       routerPassword: "",
       visiblePassword: false,
-      editable: false,
+      // editable: false,
+      editable: true,
       networks: "",
       activity: false
     }
@@ -37,6 +39,7 @@ export default class MainScreen extends React.Component {
     this.onChangeActivity = this.onChangeActivity.bind(this)
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this)
     this.onDisplayPassword = this.onDisplayPassword.bind(this)
+    this.onChangeValuePassRouter = this.onChangeValuePassRouter.bind(this)
   }
 
   componentWillMount() {
@@ -46,6 +49,10 @@ export default class MainScreen extends React.Component {
 
   componentWillUnmount() {
     this.onDataReadEvent.remove();
+  }
+
+  onChangeValuePassRouter(routerPassword){
+    this.setState({ routerPassword })
   }
 
   onDisplayPassword(){
@@ -180,16 +187,10 @@ export default class MainScreen extends React.Component {
                     networks={this.state.networks}
                     enabled={this.state.editable}
                   />
-      
-                  <TextInput
-                    style={styles.textInput}
-                    onChangeText={(routerPassword) => this.setState({ routerPassword })}
-                    secureTextEntry={!this.state.visiblePassword}
-                    value={this.state.routerPassword}
-                    editable={this.state.editable}
-                    placeholder="Введіть пароль роутера"
-                    placeholderTextColor="black"
-                  />
+                  <InputPassword onChangeValuePassRouter = {this.onChangeValuePassRouter} 
+                    visiblePassword = {this.state.visiblePassword} 
+                    value = {this.state.routerPassword}
+                    editable = {this.state.editable} />
                   
                   <View >
                     <DisplayPassword 
