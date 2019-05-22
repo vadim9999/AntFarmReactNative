@@ -6,6 +6,9 @@ import { init, writeToDevice } from "../../selector/selector"
 import KeyboardShift from '../../components/KeyboardShift';
 import NetworkPicker from '../../components/NetworkPicker';
 import DisplayPassword from '../../components/DisplayPassword';
+import ButtonGetIP from '../../components/ButtonGetIP';
+import ButtonRefreshWIFI from '../../components/ButtonRefreshWIFI';
+
 import Loader from '../../components/Loader';
 import image from "./background/83.png"
 
@@ -203,26 +206,11 @@ export default class MainScreen extends React.Component {
                       disabled={!this.state.editable}
                     />
                     </View>
-                    <View style={styles.buttons}>
-                    <Button
-                      style={styles.buttons}
-                      onPress={this.onGetIP}
-                      title="Дізнатися IP адресу"
-                      color="#841584"
-                      accessibilityLabel="Learn more about this purple button"
-                      disabled={!this.state.editable}
-                    />
+                    
+                    <ButtonGetIP onGetIP = {this.onGetIP} editable= {this.state.editable} />
+                    <ButtonRefreshWIFI onRefreshWIFI={this.onRefreshWIFI} editable= {this.state.editable}/>
+                    
                     </View>
-                    <View style={styles.buttons}>
-                    <Button
-                      style={styles.buttons}
-                      onPress={this.onRefreshWIFI}
-                      title="Оновити список мереж"
-                      color="#841584"
-                      disabled={!this.state.editable}
-                    />
-                    </View>
-                  </View>
                 </View>
                 )
               }
