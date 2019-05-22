@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox} from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
-import Scan from "./components/Scan"
-import { init, writeToDevice } from "./selector/selector"
-import KeyboardShift from './components/KeyboardShift';
-import NetworkPicker from './components/NetworkPicker';
-import Loader from './components/Loader';
+import Scan from "../../../components/Scan"
+import { init, writeToDevice } from "../../../selector/selector"
+import KeyboardShift from '../../../components/KeyboardShift';
+import NetworkPicker from '../../../components/NetworkPicker';
+import Loader from '../../../components/Loader';
 import image from "./background/83.png"
 
 export default class MainScreen extends React.Component {

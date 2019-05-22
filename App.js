@@ -1,6 +1,6 @@
 import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
-import AboutApplication from "./AboutApplication"
-import MainScreen from "./MainScreen"
+import AboutApplication from "./src/screens/aboutApplication/AboutApplication"
+import MainScreen from "./src/screens/main/MainScreen"
 // const MainNavigator = createStackNavigator({
 //   Home: {screen: HomeScreen},
 //   Profile: {screen: MainScreen},
