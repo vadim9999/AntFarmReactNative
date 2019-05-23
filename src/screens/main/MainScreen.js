@@ -111,7 +111,7 @@ export default class MainScreen extends React.Component {
     var receivedData = JSON.parse(data)
     
       if (receivedData.request == "getIP") {
-        checkRequestOnIP(receivedData)
+        this.checkRequestOnIP(receivedData)
   
       }else{
         var objectForState = getObjectForState(receivedData)
