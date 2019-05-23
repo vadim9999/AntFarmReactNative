@@ -1,6 +1,6 @@
 import { createAppContainer, createDrawerNavigator } from 'react-navigation';
-import AboutApplication from "./screens/aboutApplication/AboutApplication"
-import MainScreen from "./screens/main/MainScreen"
+import AboutApplication from './screens/aboutApplication/AboutApplication';
+import MainScreen from './screens/main/MainScreen';
 
 const MyDrawerNavigator = createDrawerNavigator(
   {
@@ -11,7 +11,7 @@ const MyDrawerNavigator = createDrawerNavigator(
       screen: AboutApplication,
     },
 
-  }
+  },
 );
 
 const App = createAppContainer(MyDrawerNavigator);

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'black',
         borderBottomWidth: 2,
         margin: 12,
-        color: 'green'
+        color: '#8b2d77'
     },
     content: {
         flex: 1,

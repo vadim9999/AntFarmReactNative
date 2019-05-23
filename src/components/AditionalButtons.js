@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
 
-export default class ButtonGetIP extends React.Component {
+export default class AditionButtons extends React.Component {
     render(){
         return(
+            <View>
              <View style={styles.buttons}>
                     <Button
                       style={styles.buttons}
@@ -15,6 +16,16 @@ export default class ButtonGetIP extends React.Component {
                       disabled={!this.props.editable}
                     />
                     </View>
+                    <View style={styles.buttons}>
+                <Button
+                    style={styles.buttons}
+                    onPress={this.props.onRefreshWIFI}
+                    title="Оновити список мереж"
+                    color="#841584"
+                    disabled={!this.props.editable}
+                />
+            </View>
+            </View>
         )
     }
 }

@@ -80,12 +80,13 @@ export default class Scan extends React.Component {
     return (
       <View style={styles.scan_block}>
         <Text style={{fontSize:20,  color:'#8b2d77'}}>Виберіть ферму</Text>
+        <ActivityIndicator animating={this.state.activity} size="small" color="#0000ff" />
         <View style={styles.picker_activity}>
           <DevicePicker
             getItem={this.getItem}
             devices={this.state.devices}
           />
-          <ActivityIndicator animating={this.state.activity} size="small" color="#0000ff" />
+          
         </View>
         <View style={styles.button_block}>
 
@@ -94,7 +95,7 @@ export default class Scan extends React.Component {
               onPress={this.onScan}
               width="40"
               title="Сканувати"
-              color="#87CEEB"
+              color="#841584"
               accessibilityLabel="Learn more about this purple button"
             />
           </View>
@@ -104,7 +105,7 @@ export default class Scan extends React.Component {
               onPress={this.onConnect}
               width="40"
               title="Підключитися"
-              color="#87CEEB"
+              color="#841584"
               accessibilityLabel="Learn more about this purple button"
             />
 
@@ -132,6 +133,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     justifyContent: "center",
-    backgroundColor:'green'
+    
   }
 });

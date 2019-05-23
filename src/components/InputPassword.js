@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox } from 'react-native';
+import { writeToDevice } from "../selector/selector"
 import styles from "../screens/main/styles.js"
 
 export default class InputPassword extends React.Component {
@@ -32,6 +33,9 @@ export default class InputPassword extends React.Component {
     
         writeToDevice(JSON.stringify(data))
         this.props.onChangeActivity(true)
+        this.setState({
+            routerPassword:''
+        })
       }
 
     onChangeValuePassRouter(routerPassword) {
@@ -39,7 +43,7 @@ export default class InputPassword extends React.Component {
   }
     render() {
         return (
-            <View style={{backgroundColor:"green"}}>
+            <View>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(routerPassword) => this.onChangeValuePassRouter(routerPassword)}
