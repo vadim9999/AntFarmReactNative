@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "easy-bluetooth-classic": "^1.0.4",
+    "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-gesture-handler": "^1.2.1",
