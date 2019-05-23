@@ -31,14 +31,13 @@ export default class MainScreen extends React.Component {
       activity: false
     }
 
-    this.onSend = this.onSend.bind(this)
     this.enableEditing = this.enableEditing.bind(this)
-    this.getNetwork = this.getNetwork.bind(this)
+    this.setNetwork = this.setNetwork.bind(this)
     this.onGetIP = this.onGetIP.bind(this)
     this.onChangeActivity = this.onChangeActivity.bind(this)
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this)
-
-    this.onChangeValuePassRouter = this.onChangeValuePassRouter.bind(this)
+    this.onSetActivity = this.onSetActivity.bind(this)
+    
   }
 
   componentWillMount() {
@@ -48,28 +47,6 @@ export default class MainScreen extends React.Component {
 
   componentWillUnmount() {
     this.onDataReadEvent.remove();
-  }
-
-  onChangeValuePassRouter(routerPassword) {
-    this.setState({ routerPassword })
-  }
-
-  onDisplayPassword() {
-    this.setState({
-      visiblePassword: !this.state.visiblePassword
-    })
-  }
-  onSend() {
-    var data = {
-      "request": "setWIFIData",
-      "network": this.state.network,
-      "password": this.state.routerPassword
-    }
-
-    writeToDevice(JSON.stringify(data))
-    this.setState({
-      activity: true
-    })
   }
 
   onGetIP() {
@@ -95,14 +72,6 @@ export default class MainScreen extends React.Component {
       "request": "getWIFIData"
     }
     writeToDevice(JSON.stringify(data))
-  }
-
-  checkRequestOnIP(receivedData) {
-    if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
-      Alert.alert(receivedData["ip"])
-    } else {
-      Alert.alert("Помилка перевірте підключення")
-    }
   }
 
   onDataRead(data) {
@@ -145,7 +114,7 @@ export default class MainScreen extends React.Component {
         writeToDevice(JSON.stringify(data))
         break;
 
-      case "getWIFIData":
+      case "getIP":
         if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
           Alert.alert(receivedData["ip"])
 
@@ -165,7 +134,7 @@ export default class MainScreen extends React.Component {
       activity: true
     })
   }
-  getNetwork(network) {
+  setNetwork(network) {
     this.setState({
       network: network
     })
@@ -185,44 +154,25 @@ export default class MainScreen extends React.Component {
             <View style={styles.wifi_form}>
               <KeyboardShift>
                 {() =>
-                  (<View>
+                  (<View style={{backgroundColor:'blue'}} >
 
                     <Text style={{ fontSize: 20, color: '#8b2d77' }}>Виберіть wifi мережу</Text>
-                    <NetworkPicker getNetwork={this.getNetwork}
+                    <NetworkPicker setNetwork={this.setNetwork}
                       networks={this.state.networks}
                       enabled={this.state.editable}
                     />
-                    <InputPassword onChangeValuePassRouter={this.onChangeValuePassRouter}
-                      visiblePassword={this.state.visiblePassword}
-                      value={this.state.routerPassword}
+                    <InputPassword 
+                      network={this.state.network}
+                      onChangeActivity = {this.onChangeActivity}
                       editable={this.state.editable} />
-
-                    <View >
-                      {/* <DisplayPassword 
-                    editable={this.state.editable}
-                    onDisplayPassword = {this.onDisplayPassword}/> */}
-
-                      <View style={styles.buttons}>
-                        <Button
-                          style={styles.buttons}
-                          onPress={this.onSend}
-                          title="Зберегти"
-                          color="#841584"
-                          accessibilityLabel="Learn more about this purple button"
-                          disabled={!this.state.editable}
-                        />
-                      </View>
 
                       <ButtonGetIP onGetIP={this.onGetIP} editable={this.state.editable} />
                       <ButtonRefreshWIFI onRefreshWIFI={this.onRefreshWIFI} editable={this.state.editable} />
-
-                    </View>
+                    
                   </View>
                   )
                 }
-
               </KeyboardShift>
-
             </View>
           </View>
         </View>

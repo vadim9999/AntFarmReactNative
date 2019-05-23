@@ -18,7 +18,6 @@ export default class NetworkPicker extends React.Component {
                         return <Picker.Item key={uuidv1} label={network} value={network} />
                     }
                 }
-
                 ))
         }
 
@@ -33,7 +32,7 @@ export default class NetworkPicker extends React.Component {
                 onValueChange={(itemValue, itemIndex) => {
                     console.log("Changed values");
                     this.setState({ network: itemValue })
-                    this.props.getNetwork(itemValue)
+                    this.props.setNetwork(itemValue)
                 }
                 }>
 
