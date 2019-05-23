@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox} from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
 import Scan from "../../components/Scan"
-import { init, writeToDevice, getArrWithConnNetwork, getObjectForState } from "../../selector/selector"
+import { init, writeToDevice, getArrWithConnNetwork } from "../../selector/selector"
 import KeyboardShift from '../../components/KeyboardShift';
 import NetworkPicker from '../../components/NetworkPicker';
 
@@ -106,29 +106,56 @@ export default class MainScreen extends React.Component {
   }
 
   onDataRead(data) {
+
     console.log("onDataRead");
-    if (data !== undefined){
     var receivedData = JSON.parse(data)
+
+    if (receivedData.request == "getWIFIData") {
+      var networks = receivedData["data"];
+      var connectedNetwork = receivedData["router"];
+      networks = getArrWithConnNetwork(networks, connectedNetwork)
+
+      if(networks != undefined &&  networks.length > 0){
+        this.setState({
+          networks: networks,
+          network: networks[0],
+          activity: false
+        })
+      }
+    }
+
+    if (receivedData.request == "setWIFIData") {
+
+      if (receivedData["ipAddress"] != "FAIL") {
+        this.setState({
+          routerPassword: "",
+          visiblePassword: false,
+          activity: false,
+        })
+      }
+      else {
+        Alert.alert('Сталася помилка. Будь ласка перевірте логін та пароль ')
+        this.setState({
+          activity: false
+        })
+      }
+      var data = {
+        "request": "getWIFIData"
+      }
+      writeToDevice(JSON.stringify(data))
+    }
+
+    if (receivedData.request == "getIP") {
+      if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
+        Alert.alert(receivedData["ip"])
     
-      if (receivedData.request == "getIP") {
-        this.checkRequestOnIP(receivedData)
-  
-      }else{
-        var objectForState = getObjectForState(receivedData)
-        var stateProperties = objectForState["properties"]
-        var status = objectForState["status"]
-    
-        if (stateProperties != undefined && Object.keys(stateProperties).length !== 0 && stateProperties.constructor === Object) {
-          this.setState(stateProperties)
-        }
-    
-        if(status === "FAIL"){
-          Alert.alert("Помилка перевірте підключення")
-        }
+      } else {
+        Alert.alert("Помилка перевірте підключення")
+      }
       }
     }
     
-  }
+  
 
   enableEditing() {
     this.setState({

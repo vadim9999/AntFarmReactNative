@@ -91,66 +91,7 @@ function getArrWithConnNetwork(networks, connectedNetwork) {
   return networks
 }
 
-function getObjectForState(receivedData) {
-  
-  var obj = {
-    properties: {
 
-    },
-    status: ""
-  }
-  if (receivedData.request == "getWIFIData") {
-    var networks = receivedData["data"];
-    var connectedNetwork = receivedData["router"]
-
-    var sortedNetworks = getArrWithConnNetwork(networks, connectedNetwork)
-
-    if (sortedNetworks != undefined && sortedNetworks.length > 0) {
-      obj = {
-        properties: {
-          networks: networks,
-          network: networks[0],
-          activity: false
-        },
-         status: "OK"
-      }
-    }
-
-  }
-
-  if (receivedData.request == "setWIFIData") {
-
-    if (receivedData["ipAddress"] != "FAIL") {
-      obj = {
-        properties: {
-          routerPassword: "",
-          visiblePassword: false,
-          activity: false,
-        },
-        status: "OK"
-      }
-      
-    }
-    else {
-      // Alert.alert('Сталася помилка. Будь ласка перевірте логін та пароль ')
-      obj = {
-        properties: {
-            activity: false
-          
-        },
-        status: "FAIL"
-      }
-      
-    }
-    var data = {
-      "request": "getWIFIData"
-    }
-    writeToDevice(JSON.stringify(data))
-  }
-
-  return obj
-
-}
 
 export {
   init,
@@ -160,6 +101,5 @@ export {
   connectToDevice,
   writeToDevice,
   getArrWithConnNetwork,
-  getObjectForState
 
 }
