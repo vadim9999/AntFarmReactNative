@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox} from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
 import Scan from "../../components/Scan"
-import { init, writeToDevice } from "../../selector/selector"
+import { init, writeToDevice, getArrWithConnNetwork, getObjectForState } from "../../selector/selector"
 import KeyboardShift from '../../components/KeyboardShift';
 import NetworkPicker from '../../components/NetworkPicker';
-import DisplayPassword from '../../components/DisplayPassword';
+
 import ButtonGetIP from '../../components/ButtonGetIP';
 import ButtonRefreshWIFI from '../../components/ButtonRefreshWIFI';
 import InputPassword from '../../components/InputPassword';
 
 import Loader from '../../components/Loader';
-import image from "./background/83.png"
+import image from "./background/86.jpg"
 
 import styles from "./styles"
 export default class MainScreen extends React.Component {
@@ -25,7 +25,6 @@ export default class MainScreen extends React.Component {
     this.state = {
       network: "",
       routerPassword: "",
-      visiblePassword: false,
       // editable: false,
       editable: true,
       networks: "",
@@ -38,7 +37,7 @@ export default class MainScreen extends React.Component {
     this.onGetIP = this.onGetIP.bind(this)
     this.onChangeActivity = this.onChangeActivity.bind(this)
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this)
-    this.onDisplayPassword = this.onDisplayPassword.bind(this)
+    
     this.onChangeValuePassRouter = this.onChangeValuePassRouter.bind(this)
   }
 
@@ -97,63 +96,40 @@ export default class MainScreen extends React.Component {
     }
     writeToDevice(JSON.stringify(data))
   }
-  onDataRead(data) {
-    console.log("onDataRead");
-    var receivedData = JSON.parse(data)
-    
-    if (receivedData.request == "getWIFIData") {
-      var networks = receivedData["data"];
 
-      if (receivedData["router"] !== "") {
-        var index = networks.indexOf(receivedData["router"])
-        if (index > 0) {
-          var tmp = networks[0]
-          networks[0] = networks[index] + " підключено"
-          networks[index] = tmp
-        }else if(index == 0) {
-          networks[0] += " підключено"
-        }
-      }
-      
-      if(networks != undefined &&  networks.length > 0){
-        this.setState({
-          networks: networks,
-          network: networks[0],
-          activity: false
-        })
-      }
-    }
-
-    if (receivedData.request == "setWIFIData") {
-      
-      if (receivedData["ipAddress"] != "FAIL") {
-        this.setState({
-          routerPassword: "",
-          visiblePassword: false,
-          activity: false,
-        })
-      }
-      else {
-        Alert.alert('Сталася помилка. Будь ласка перевірте логін та пароль ')
-        this.setState({
-          activity: false
-        })
-      }
-      var data = {
-        "request": "getWIFIData"
-      }
-      writeToDevice(JSON.stringify(data))
-    }
-
-    if (receivedData.request == "getIP") {
+  checkRequestOnIP(receivedData){
       if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
-        Alert.alert(receivedData["ip"])
+        Alert.alert(receivedData["ip"])     
       } else {
         Alert.alert("Помилка перевірте підключення")
       }
-
-    }
   }
+
+  onDataRead(data) {
+    console.log("onDataRead");
+    if (data !== undefined){
+    var receivedData = JSON.parse(data)
+    
+      if (receivedData.request == "getIP") {
+        checkRequestOnIP(receivedData)
+  
+      }else{
+        var objectForState = getObjectForState(receivedData)
+        var stateProperties = objectForState["properties"]
+        var status = objectForState["status"]
+    
+        if (stateProperties != undefined && Object.keys(stateProperties).length !== 0 && stateProperties.constructor === Object) {
+          this.setState(stateProperties)
+        }
+    
+        if(status === "FAIL"){
+          Alert.alert("Помилка перевірте підключення")
+        }
+      }
+    }
+    
+  }
+
   enableEditing() {
     this.setState({
       editable: true,
@@ -175,14 +151,14 @@ export default class MainScreen extends React.Component {
           loading={this.state.activity} onChangeActivity={this.onChangeActivity} />
         <View style={styles.content}>
           <Scan
-
             enableEditing={this.enableEditing} />
+
           <View style={styles.wifi_form}>
             <KeyboardShift>
               {() =>
                 (<View>
 
-                  <Text style={{fontSize:20}}>Виберіть wifi мережу</Text>
+                  <Text style={{fontSize:20, color:'#8b2d77'}}>Виберіть wifi мережу</Text>
                   <NetworkPicker getNetwork={this.getNetwork}
                     networks={this.state.networks}
                     enabled={this.state.editable}
@@ -193,10 +169,9 @@ export default class MainScreen extends React.Component {
                     editable = {this.state.editable} />
                   
                   <View >
-                    <DisplayPassword 
-                    visiblePassword={this.state.visiblePassword} 
+                    {/* <DisplayPassword 
                     editable={this.state.editable}
-                    onDisplayPassword = {this.onDisplayPassword}/>
+                    onDisplayPassword = {this.onDisplayPassword}/> */}
 
                     <View style={styles.buttons}>
                     <Button

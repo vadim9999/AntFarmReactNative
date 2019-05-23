@@ -79,7 +79,7 @@ export default class Scan extends React.Component {
    
     return (
       <View style={styles.scan_block}>
-        <Text style={{fontSize:20}}>Виберіть ферму</Text>
+        <Text style={{fontSize:20,  color:'#8b2d77'}}>Виберіть ферму</Text>
         <View style={styles.picker_activity}>
           <DevicePicker
             getItem={this.getItem}
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     paddingTop: '8%',
     flex: 1,
     height: 50,
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor:'green'
   }
 });
