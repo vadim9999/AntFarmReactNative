@@ -1,7 +1,13 @@
 import React from 'react';
-import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox } from 'react-native';
+import { StyleSheet, Alert, View, ImageBackground, TextInput, CheckBox } from 'react-native';
 import { writeToDevice } from "../selector/selector"
 import styles from "../screens/main/styles.js"
+import {
+   
+    Button,
+    Text
+   
+  } from "native-base";
 
 export default class InputPassword extends React.Component {
     constructor(props) {
@@ -65,15 +71,15 @@ export default class InputPassword extends React.Component {
                         <Text style={{ marginTop: 5 }}> Показати пароль</Text>
                     </View>
                 </View>
-                <View style={styles.buttons}>
-                    <Button
-                        style={styles.buttons}
-                        onPress={this.onSend}
-                        title="Зберегти"
-                        color="#841584"
-                        accessibilityLabel="Learn more about this purple button"
-                        disabled={!this.props.editable}
-                    />
+                <View >
+                <Button block rounded primary 
+                onPress={this.onSend}
+                        
+                disabled={!this.props.editable}                
+                 style={styles.mb15}>
+            <Text>Зберегти</Text>
+          </Button>
+          
                 </View>
             </View>
 

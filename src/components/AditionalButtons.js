@@ -1,37 +1,37 @@
 import React from 'react';
-import { StyleSheet, Button, View } from 'react-native';
-
+import { StyleSheet, View } from 'react-native';
+import {
+   
+    Button,
+    Text
+   
+  } from "native-base";
 
 export default class AditionButtons extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <View>
-             <View style={styles.buttons}>
-                    <Button
-                      style={styles.buttons}
-                      onPress={this.props.onGetIP}
-                      title="Дізнатися IP адресу"
-                      color="#841584"
-                      accessibilityLabel="Learn more about this purple button"
-                      disabled={!this.props.editable}
-                    />
-                    </View>
-                    <View style={styles.buttons}>
-                <Button
-                    style={styles.buttons}
-                    onPress={this.props.onRefreshWIFI}
-                    title="Оновити список мереж"
-                    color="#841584"
+                <View>
+                    <Button rounded block primary 
+                    onPress={this.props.onGetIP}
                     disabled={!this.props.editable}
-                />
-            </View>
+                    style={styles.mb15}>
+                        <Text>Дізнатися IP</Text>
+                    </Button>
+                    <Button rounded block primary 
+                    onPress={this.props.onRefreshWIFI}
+                    disabled={!this.props.editable}
+                    style={styles.buttons}>
+                        <Text>Оновити список</Text>
+                    </Button>
+                </View>
             </View>
         )
     }
 }
-
+ 
 const styles = StyleSheet.create({
     buttons: {
-      marginTop: 15,
+        marginTop: 15,
     }
-  });
+});

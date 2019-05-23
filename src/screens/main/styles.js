@@ -29,7 +29,10 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         margin: '4%'
-    }
+    },
+    mb15: {
+        marginBottom: 20
+      },
 });
 
 export default styles

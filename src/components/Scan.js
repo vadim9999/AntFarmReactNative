@@ -1,8 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet,  View, ActivityIndicator, Alert } from 'react-native';
 import { writeToDevice, onStartScan, connectToDevice } from "../selector/selector"
 import DevicePicker from "./DevicePicker"
-
+import {
+   
+  Button,
+  Text
+ 
+} from "native-base";
 
 export default class Scan extends React.Component {
   constructor(props) {
@@ -80,7 +85,7 @@ export default class Scan extends React.Component {
     return (
       <View style={styles.scan_block}>
         <Text style={{fontSize:20,  color:'#8b2d77'}}>Виберіть ферму</Text>
-        <ActivityIndicator animating={this.state.activity} size="small" color="#0000ff" />
+        
         <View style={styles.picker_activity}>
           <DevicePicker
             getItem={this.getItem}
@@ -89,32 +94,25 @@ export default class Scan extends React.Component {
           
         </View>
         <View style={styles.button_block}>
+        <Button
+        onPress={this.onScan}
 
-          <View style={styles.buttons}>
-            <Button
-              onPress={this.onScan}
-              width="40"
-              title="Сканувати"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-          </View>
-
-          <View style={styles.buttons}>
-            <Button
-              onPress={this.onConnect}
-              width="40"
-              title="Підключитися"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-
-          </View>
+        rounded>
+          <ActivityIndicator animating={this.state.activity} style={{marginLeft:5}} size="small" color="green" />
+            <Text>Сканувати</Text>
+          </Button>
+          <Button 
+          onPress={this.onConnect}
+          rounded>
+            <Text>Підлючитися</Text>
+          </Button>
+          
         </View>
       </View>
     )
   }
 }
+
 
 const styles = StyleSheet.create({
 
@@ -123,6 +121,7 @@ const styles = StyleSheet.create({
   },
   button_block: {
     flexDirection: 'row',
+    justifyContent:'space-between'
   },
   buttons: {
     backgroundColor: 'steelblue',
