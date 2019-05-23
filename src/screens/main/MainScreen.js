@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox} from 'react-native';
+import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox } from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
 import Scan from "../../components/Scan"
 import { init, writeToDevice, getArrWithConnNetwork } from "../../selector/selector"
@@ -17,7 +17,7 @@ import styles from "./styles"
 export default class MainScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Головна',
-    
+
   };
 
   constructor(props) {
@@ -37,7 +37,7 @@ export default class MainScreen extends React.Component {
     this.onGetIP = this.onGetIP.bind(this)
     this.onChangeActivity = this.onChangeActivity.bind(this)
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this)
-    
+
     this.onChangeValuePassRouter = this.onChangeValuePassRouter.bind(this)
   }
 
@@ -50,14 +50,14 @@ export default class MainScreen extends React.Component {
     this.onDataReadEvent.remove();
   }
 
-  onChangeValuePassRouter(routerPassword){
+  onChangeValuePassRouter(routerPassword) {
     this.setState({ routerPassword })
   }
 
-  onDisplayPassword(){
+  onDisplayPassword() {
     this.setState({
       visiblePassword: !this.state.visiblePassword
-  })
+    })
   }
   onSend() {
     var data = {
@@ -97,65 +97,67 @@ export default class MainScreen extends React.Component {
     writeToDevice(JSON.stringify(data))
   }
 
-  checkRequestOnIP(receivedData){
-      if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
-        Alert.alert(receivedData["ip"])     
-      } else {
-        Alert.alert("Помилка перевірте підключення")
-      }
+  checkRequestOnIP(receivedData) {
+    if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
+      Alert.alert(receivedData["ip"])
+    } else {
+      Alert.alert("Помилка перевірте підключення")
+    }
   }
 
   onDataRead(data) {
 
     console.log("onDataRead");
     var receivedData = JSON.parse(data)
+    switch (receivedData.request) {
 
-    if (receivedData.request == "getWIFIData") {
-      var networks = receivedData["data"];
-      var connectedNetwork = receivedData["router"];
-      networks = getArrWithConnNetwork(networks, connectedNetwork)
+      case "getWIFIData":
+        var networks = receivedData["data"];
+        var connectedNetwork = receivedData["router"];
+        networks = getArrWithConnNetwork(networks, connectedNetwork)
 
-      if(networks != undefined &&  networks.length > 0){
-        this.setState({
-          networks: networks,
-          network: networks[0],
-          activity: false
-        })
-      }
+        if (networks != undefined && networks.length > 0) {
+          this.setState({
+            networks: networks,
+            network: networks[0],
+            activity: false
+          })
+        }
+        break;
+
+      case "setWIFIData":
+        if (receivedData["ipAddress"] != "FAIL") {
+          this.setState({
+            routerPassword: "",
+            visiblePassword: false,
+            activity: false,
+          })
+        }
+        else {
+          Alert.alert('Сталася помилка. Будь ласка перевірте логін та пароль ')
+          this.setState({
+            activity: false
+          })
+        }
+        var data = {
+          "request": "getWIFIData"
+        }
+        writeToDevice(JSON.stringify(data))
+        break;
+
+      case "getWIFIData":
+        if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
+          Alert.alert(receivedData["ip"])
+
+        } else {
+          Alert.alert("Помилка перевірте підключення")
+        }
+        break;
+
+      default:
+        break;
     }
-
-    if (receivedData.request == "setWIFIData") {
-
-      if (receivedData["ipAddress"] != "FAIL") {
-        this.setState({
-          routerPassword: "",
-          visiblePassword: false,
-          activity: false,
-        })
-      }
-      else {
-        Alert.alert('Сталася помилка. Будь ласка перевірте логін та пароль ')
-        this.setState({
-          activity: false
-        })
-      }
-      var data = {
-        "request": "getWIFIData"
-      }
-      writeToDevice(JSON.stringify(data))
-    }
-
-    if (receivedData.request == "getIP") {
-      if (receivedData["ip"] != undefined & receivedData["ip"] != "NoIP") {
-        Alert.alert(receivedData["ip"])
-    
-      } else {
-        Alert.alert("Помилка перевірте підключення")
-      }
-      }
-    }
-    
-  
+  }
 
   enableEditing() {
     this.setState({
@@ -169,61 +171,61 @@ export default class MainScreen extends React.Component {
     })
   }
   render() {
-    
+
     return (
       <ImageBackground source={image} style={styles.imageBackground}>
-      <View style={styles.container}>
+        <View style={styles.container}>
 
-        <Loader
-          loading={this.state.activity} onChangeActivity={this.onChangeActivity} />
-        <View style={styles.content}>
-          <Scan
-            enableEditing={this.enableEditing} />
+          <Loader
+            loading={this.state.activity} onChangeActivity={this.onChangeActivity} />
+          <View style={styles.content}>
+            <Scan
+              enableEditing={this.enableEditing} />
 
-          <View style={styles.wifi_form}>
-            <KeyboardShift>
-              {() =>
-                (<View>
+            <View style={styles.wifi_form}>
+              <KeyboardShift>
+                {() =>
+                  (<View>
 
-                  <Text style={{fontSize:20, color:'#8b2d77'}}>Виберіть wifi мережу</Text>
-                  <NetworkPicker getNetwork={this.getNetwork}
-                    networks={this.state.networks}
-                    enabled={this.state.editable}
-                  />
-                  <InputPassword onChangeValuePassRouter = {this.onChangeValuePassRouter} 
-                    visiblePassword = {this.state.visiblePassword} 
-                    value = {this.state.routerPassword}
-                    editable = {this.state.editable} />
-                  
-                  <View >
-                    {/* <DisplayPassword 
+                    <Text style={{ fontSize: 20, color: '#8b2d77' }}>Виберіть wifi мережу</Text>
+                    <NetworkPicker getNetwork={this.getNetwork}
+                      networks={this.state.networks}
+                      enabled={this.state.editable}
+                    />
+                    <InputPassword onChangeValuePassRouter={this.onChangeValuePassRouter}
+                      visiblePassword={this.state.visiblePassword}
+                      value={this.state.routerPassword}
+                      editable={this.state.editable} />
+
+                    <View >
+                      {/* <DisplayPassword 
                     editable={this.state.editable}
                     onDisplayPassword = {this.onDisplayPassword}/> */}
 
-                    <View style={styles.buttons}>
-                    <Button
-                      style={styles.buttons}
-                      onPress={this.onSend}
-                      title="Зберегти"
-                      color="#841584"
-                      accessibilityLabel="Learn more about this purple button"
-                      disabled={!this.state.editable}
-                    />
+                      <View style={styles.buttons}>
+                        <Button
+                          style={styles.buttons}
+                          onPress={this.onSend}
+                          title="Зберегти"
+                          color="#841584"
+                          accessibilityLabel="Learn more about this purple button"
+                          disabled={!this.state.editable}
+                        />
+                      </View>
+
+                      <ButtonGetIP onGetIP={this.onGetIP} editable={this.state.editable} />
+                      <ButtonRefreshWIFI onRefreshWIFI={this.onRefreshWIFI} editable={this.state.editable} />
+
                     </View>
+                  </View>
+                  )
+                }
 
-                    <ButtonGetIP onGetIP = {this.onGetIP} editable= {this.state.editable} />
-                    <ButtonRefreshWIFI onRefreshWIFI={this.onRefreshWIFI} editable= {this.state.editable}/>
-                    
-                    </View>
-                </View>
-                )
-              }
+              </KeyboardShift>
 
-            </KeyboardShift>
-
+            </View>
           </View>
         </View>
-      </View>
       </ImageBackground>
     );
   }
