@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around'
       }
+    //   keyboard shift
+    containerKeyBoardShift: {
+        height: '100%',
+        left: 0,
+        position: 'absolute',
+        top: 0,
+        width: '100%'
+      }
 });
 
 export default styles;

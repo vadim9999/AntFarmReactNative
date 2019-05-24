@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
 import { Animated, Dimensions, Keyboard, StyleSheet, TextInput, UIManager } from 'react-native';
+import styles from './styles';
 
 const { State: TextInputState } = TextInput;
 
@@ -23,7 +24,7 @@ export default class KeyboardShift extends Component {
     const { children: renderProp } = this.props;
     const { shift } = this.state;
     return (
-      <Animated.View style={[styles.container, { transform: [{translateY: shift}] }]}>
+      <Animated.View style={[styles.containerKeyBoardShift, { transform: [{translateY: shift}] }]}>
         {renderProp()}
       </Animated.View>
     );
@@ -62,16 +63,6 @@ export default class KeyboardShift extends Component {
     ).start();
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    left: 0,
-    position: 'absolute',
-    top: 0,
-    width: '100%'
-  }
-});
 
 KeyboardShift.propTypes = {
   children: PropTypes.func.isRequired,
