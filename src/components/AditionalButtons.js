@@ -3,7 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import {
    
     Button,
-    Text
+    Text,
+    Row
    
   } from "native-base";
 
@@ -11,7 +12,7 @@ export default class AditionButtons extends React.Component {
     render() {
         return (
             <View>
-                <View>
+                
                     <Button rounded block primary 
                     onPress={this.props.onGetIP}
                     disabled={!this.props.editable}
@@ -24,8 +25,8 @@ export default class AditionButtons extends React.Component {
                     style={styles.buttons}>
                         <Text>Оновити список</Text>
                     </Button>
-                </View>
-            </View>
+                
+                    </View>
         )
     }
 }

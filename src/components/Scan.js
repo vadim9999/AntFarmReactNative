@@ -5,7 +5,16 @@ import DevicePicker from "./DevicePicker"
 import {
    
   Button,
-  Text
+  Text,
+  Input,
+  Form,
+  Item,
+  CheckBox,
+  Body,
+  ListItem,
+  Picker,
+  Row,
+  Spinner
  
 } from "native-base";
 
@@ -84,27 +93,33 @@ export default class Scan extends React.Component {
    
     return (
       <View style={styles.scan_block}>
-        <Text style={{fontSize:20,  color:'#8b2d77'}}>Виберіть ферму</Text>
-        
-        <View style={styles.picker_activity}>
-          <DevicePicker
+      <Form style={{marginBottom:5}}>
+            <Item picker>
+            
+            <Text> Виберіть ферму:</Text>
+            
+            <DevicePicker
             getItem={this.getItem}
             devices={this.state.devices}
           />
-          
-        </View>
+            </Item>
+            
+          </Form>
+       
+        
+        
         <View style={styles.button_block}>
         <Button
         onPress={this.onScan}
 
         rounded>
-          <ActivityIndicator animating={this.state.activity} style={{marginLeft:5}} size="small" color="green" />
+          <ActivityIndicator animating={this.state.activity} style={{marginLeft:5}} size="small" color="red" />
             <Text>Сканувати</Text>
           </Button>
           <Button 
           onPress={this.onConnect}
           rounded>
-            <Text>Підлючитися</Text>
+            <Text>Підключитися</Text>
           </Button>
           
         </View>

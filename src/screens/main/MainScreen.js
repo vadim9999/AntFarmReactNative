@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-   Alert, Text, View, ImageBackground
+   Alert, View, ImageBackground
 } from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
 import Scan from '../../components/Scan';
 import { init, writeToDevice, getArrWithConnNetwork } from '../../selector/selector';
 import KeyboardShift from '../../components/KeyboardShift';
-import NetworkPicker from '../../components/NetworkPicker';
+
 
 
 import AditionalButtons from '../../components/AditionalButtons';
@@ -16,6 +16,20 @@ import Loader from '../../components/Loader';
 import image from './background/86.jpg';
 
 import styles from './styles';
+import { Container,
+  Header,
+  Title,
+  Content,
+  Text,
+  Button,
+  Icon,
+  Footer,
+  FooterTab,
+  Left,
+  Right,
+  Body } from 'native-base';
+
+  import { Col, Row, Grid, ScrollView } from "react-native-easy-grid";
 
 export default class MainScreen extends React.Component {
   static navigationOptions = {
@@ -26,7 +40,7 @@ export default class MainScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      network: '',
+      
       routerPassword: '',
       // editable: false,
       editable: true,
@@ -35,7 +49,7 @@ export default class MainScreen extends React.Component {
     };
 
     this.enableEditing = this.enableEditing.bind(this);
-    this.setNetwork = this.setNetwork.bind(this);
+    
     this.onGetIP = this.onGetIP.bind(this);
     this.onChangeActivity = this.onChangeActivity.bind(this);
     this.onRefreshWIFI = this.onRefreshWIFI.bind(this);
@@ -131,41 +145,53 @@ export default class MainScreen extends React.Component {
     });
   }
 
-  setNetwork(network) {
-    this.setState({
-      network,
-    });
-  }
+  
 
   render() {
     return (
-      <ImageBackground source={image} style={styles.imageBackground}>
-        <View style={styles.container}>
-
+        
+        <Container >
+         <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.openDrawer()}
+            >
+              <Icon name="ios-menu" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Мурашина ферма</Title>
+          </Body>
+          
+        </Header>  
+        <ImageBackground source={image} style={styles.imageBackground}>
+        
+        <Grid>
+          <Row size={20} style={{padding:20}}>
+            
           <Loader
             loading={this.state.activity}
             onChangeActivity={this.onChangeActivity}
           />
-          <View style={styles.content}>
+          {/* <View style={styles.content}> */}
             <Scan
               enableEditing={this.enableEditing}
             />
-
-            <View style={styles.wifi_form}>
-              <KeyboardShift>
+          
+          </Row>
+          <Row size={80}>
+          <KeyboardShift>
                 {() => (
-                  <View>
+                  
+                  <View style={{padding:20 }}>
 
-                    <Text style={{ fontSize: 20, color: '#8b2d77' }}>Виберіть wifi мережу</Text>
-                    <NetworkPicker
-                      setNetwork={this.setNetwork}
-                      networks={this.state.networks}
-                      enabled={this.state.editable}
-                    />
+                  
                     <InputPassword
                       network={this.state.network}
                       onChangeActivity={this.onChangeActivity}
                       editable={this.state.editable}
+                      networks={this.state.networks}
                     />
 
                     <AditionalButtons onRefreshWIFI={this.onRefreshWIFI} 
@@ -177,10 +203,14 @@ export default class MainScreen extends React.Component {
                 )
                 }
               </KeyboardShift>
-            </View>
-          </View>
-        </View>
-      </ImageBackground>
+          </Row>
+        </Grid>
+        
+          
+          
+          </ImageBackground>
+        </Container>
+        
     );
   }
 }

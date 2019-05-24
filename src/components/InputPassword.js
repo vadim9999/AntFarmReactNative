@@ -1,13 +1,22 @@
 import React from 'react';
-import { StyleSheet, Alert, View, ImageBackground, TextInput, CheckBox } from 'react-native';
+import { StyleSheet, Alert, View, ImageBackground, TextInput } from 'react-native';
 import { writeToDevice } from "../selector/selector"
 import styles from "../screens/main/styles.js"
+import NetworkPicker from './NetworkPicker';
 import {
-   
+
     Button,
-    Text
-   
-  } from "native-base";
+    Text,
+    Input,
+    Form,
+    Item,
+    CheckBox,
+    Body,
+    ListItem,
+    Picker,
+    Row
+
+} from "native-base";
 
 export default class InputPassword extends React.Component {
     constructor(props) {
@@ -15,11 +24,14 @@ export default class InputPassword extends React.Component {
         this.state = {
             visiblePassword: false,
             routerPassword: "",
+            network: '',
+            
         }
 
         this.onDisplayPassword = this.onDisplayPassword.bind(this)
         this.onChangeValuePassRouter = this.onChangeValuePassRouter.bind(this)
         this.onSend = this.onSend.bind(this)
+        this.setNetwork = this.setNetwork.bind(this);
     }
 
     onDisplayPassword() {
@@ -30,58 +42,77 @@ export default class InputPassword extends React.Component {
 
     onSend() {
         console.log(this.state.routerPassword);
-        
+
         var data = {
-          "request": "setWIFIData",
-          "network": this.props.network,
-          "password": this.state.routerPassword
+            "request": "setWIFIData",
+            "network": this.props.network,
+            "password": this.state.routerPassword
         }
-    
+
         writeToDevice(JSON.stringify(data))
         this.props.onChangeActivity(true)
         this.setState({
-            routerPassword:''
+            routerPassword: ''
         })
-      }
+    }
 
     onChangeValuePassRouter(routerPassword) {
-    this.setState({ routerPassword })
-  }
+        this.setState({ routerPassword })
+    }
+
+    setNetwork(network) {
+        this.setState({
+          network,
+        });
+      }
+    
     render() {
         return (
             <View>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={(routerPassword) => this.onChangeValuePassRouter(routerPassword)}
-                    secureTextEntry={!this.state.visiblePassword}
-                    value={this.state.routerPassword}
-                    editable={this.props.editable}
-                    placeholder="Введіть пароль роутера"
-                    placeholderTextColor="black"
-                />
+                <Form>
+                    <Item>
 
-                <View style={{ flexDirection: 'column' }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <CheckBox
+                        <Text> Виберіть мережу:</Text>
 
-                            value={this.state.visiblePassword}
-                            disabled={!this.props.editable}
-                            onValueChange={this.onDisplayPassword}
-                        />
-                        <Text style={{ marginTop: 5 }}> Показати пароль</Text>
-                    </View>
-                </View>
-                <View >
-                <Button block rounded primary 
-                onPress={this.onSend}
+                        <NetworkPicker
+                      setNetwork={this.setNetwork}
+                      networks={this.props.networks}
+                      enabled={this.props.editable}
+                    />
                         
-                disabled={!this.props.editable}                
-                 style={styles.mb15}>
-            <Text>Зберегти</Text>
-          </Button>
-          
-                </View>
+                    </Item>
+                    <Item>
+                        <Input 
+                        onChangeText={(routerPassword) => this.onChangeValuePassRouter(routerPassword)}
+                        secureTextEntry={!this.state.visiblePassword}
+                        value={this.state.routerPassword}
+                        editable={this.props.editable}
+                        placeholder="Введіть пароль мережі" />
+                    </Item>
+                    <ListItem style={{ borderColor: 'transparent' }} button onPress={this.onDisplayPassword}>
+                        <CheckBox
+                            color="#000"
+                            checked={this.state.visiblePassword}
+                            onPress={this.onDisplayPassword}
+                            color="green"
+                            disabled={!this.props.editable}
+                        />
+                        <Body>
+                            <Text>Показати пароль</Text>
+                        </Body>
+                    </ListItem>
+                </Form>
+
+
+                <Button block rounded primary
+                    onPress={this.onSend}
+
+                    disabled={!this.props.editable}
+                    style={styles.mb15}>
+                    <Text>Зберегти</Text>
+                </Button>
             </View>
+
 
         )
     }

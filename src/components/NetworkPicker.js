@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker } from 'react-native';
+import { Picker } from 'native-base';
 import uuidv1 from 'uuid/v1'
 
 export default class NetworkPicker extends React.Component {
