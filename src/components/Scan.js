@@ -1,99 +1,85 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator, Alert } from 'react-native';
-import { writeToDevice, onStartScan, connectToDevice } from "../selector/selector"
-import DevicePicker from "./DevicePicker"
 import {
-
+  StyleSheet, View, ActivityIndicator, Alert,
+} from 'react-native';
+import {
   Button,
   Text,
-  Input,
   Form,
   Item,
-  CheckBox,
-  Body,
-  ListItem,
-  Picker,
-  Row,
-  Spinner
+} from 'native-base';
+import { writeToDevice, onStartScan, connectToDevice } from '../selector/selector';
+import DevicePicker from './DevicePicker';
 
-} from "native-base";
+import styles from './styles';
 
 export default class Scan extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      device: "",
+      device: '',
       activity: true,
-      devices: []
+      devices: [],
 
-    }
-    this.onScan = this.onScan.bind(this)
-    this.onConnect = this.onConnect.bind(this)
-    this.getItem = this.getItem.bind(this)
+    };
+    this.onScan = this.onScan.bind(this);
+    this.onConnect = this.onConnect.bind(this);
+    this.getItem = this.getItem.bind(this);
   }
 
   componentWillMount() {
-    this.onScan()
+    this.onScan();
   }
 
   onConnect() {
-    var device = this.state.devices.find(device => {
-      return device.address == this.state.device
-    })
+    const device = this.state.devices.find(device => device.address == this.state.device);
 
     connectToDevice(device).then(() => {
-      console.log("Connected!");
-      this.props.enableEditing()
-      var data = {
-        "request": "getWIFIData"
-      }
-      writeToDevice(JSON.stringify(data))
-
+      console.log('Connected!');
+      this.props.enableEditing();
+      const data = {
+        request: 'getWIFIData',
+      };
+      writeToDevice(JSON.stringify(data));
     }).catch((ex) => {
-      Alert.alert('Сталася помилка при підключенні до ферми')
+      Alert.alert('Сталася помилка при підключенні до ферми');
       console.warn(ex);
-    })
+    });
   }
 
   onScan() {
-
     if (this.state.activity != true) {
       this.setState({
-        activity: true
-      })
+        activity: true,
+      });
     }
 
-    onStartScan().then(function (devices) {
-
+    onStartScan().then((devices) => {
       if (devices != undefined && devices.length > 0) {
         this.setState({
-          devices: devices,
+          devices,
           device: devices[0].address,
-          activity: false
-        })
-      }
-      else {
+          activity: false,
+        });
+      } else {
         this.setState({
-          activity: false
-        })
+          activity: false,
+        });
       }
-
-    }.bind(this)
-    )
-      .catch(function (ex) {
+    })
+      .catch((ex) => {
         console.warn(ex);
       });
   }
 
   getItem(itemValue) {
-    this.setState({ device: itemValue })
+    this.setState({ device: itemValue });
   }
 
   render() {
-
     return (
       <View style={styles.scan_block}>
-        <Form style={{ marginBottom: 5 }}>
+        <Form style={styles.scan_form}>
           <Item picker>
 
             <Text> Виберіть ферму:</Text>
@@ -109,42 +95,20 @@ export default class Scan extends React.Component {
         <View style={styles.button_block}>
           <Button
             onPress={this.onScan}
-
-            rounded>
-            <ActivityIndicator animating={this.state.activity} style={{ marginLeft: 5 }} size="small" color="red" />
+            rounded
+          >
+            <ActivityIndicator animating={this.state.activity} style={styles.spinner} size="small" color="red" />
             <Text>Сканувати</Text>
           </Button>
           <Button
             onPress={this.onConnect}
-            rounded>
+            rounded
+          >
             <Text>Підключитися</Text>
           </Button>
 
         </View>
       </View>
-    )
+    );
   }
 }
-
-
-const styles = StyleSheet.create({
-
-  picker_activity: {
-    flexDirection: 'row'
-  },
-  button_block: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  buttons: {
-    backgroundColor: 'steelblue',
-    width: '50%'
-  },
-  scan_block: {
-    paddingTop: '8%',
-    flex: 1,
-    height: 50,
-    justifyContent: "center",
-
-  }
-});
