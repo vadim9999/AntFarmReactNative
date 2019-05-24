@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, View, ActivityIndicator, Alert,
+  View, ActivityIndicator, Alert,
 } from 'react-native';
 import {
   Button,
@@ -48,14 +48,14 @@ export default class Scan extends React.Component {
   }
 
   onScan() {
-    if (this.state.activity != true) {
+    if (this.state.activity !== true) {
       this.setState({
         activity: true,
       });
     }
 
     onStartScan().then((devices) => {
-      if (devices != undefined && devices.length > 0) {
+      if (devices !== undefined && devices.length > 0) {
         this.setState({
           devices,
           device: devices[0].address,
