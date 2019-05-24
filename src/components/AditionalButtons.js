@@ -4,7 +4,7 @@ import {
    
     Button,
     Text,
-    Row
+
    
   } from "native-base";
 
