@@ -1,6 +1,7 @@
 import React from 'react';
 import { Picker } from 'native-base';
 import uuidv1 from 'uuid/v1'
+import styles from './styles';
 
 export default class DevicePicker extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class DevicePicker extends React.Component {
         return (
             <Picker
                 selectedValue={this.state.device}
-                style={{ height: 50, width: 100 }}
+                style={styles.device_picker}
                 onValueChange={(itemValue, itemIndex) => {
                     this.setState({ device: itemValue })
                     this.props.getItem(itemValue)

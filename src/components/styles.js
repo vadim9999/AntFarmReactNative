@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around'
-      }
+      },
     //   keyboard shift
     containerKeyBoardShift: {
         height: '100%',
@@ -55,7 +55,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         width: '100%'
-      }
+      },
+    //   device picker
+    device_picker: { height: 50, width: 100 },
+
 });
 
 export default styles;
