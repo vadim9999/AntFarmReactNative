@@ -6,6 +6,8 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import styles from './styles';
+
 export default class Loader extends React.Component {
   state = {
     modalVisible: this.props.loading,
@@ -17,8 +19,7 @@ export default class Loader extends React.Component {
         transparent={true}
         animationType={'none'}
         visible={this.props.loading}
-        onRequestClose={() => {this.props.onChangeActivity(false)
-         console.log('close modal')}}>
+        onRequestClose={() => {this.props.onChangeActivity(false)}}>
         <View style={styles.modalBackground}>
           <View style={styles.activityIndicatorWrapper}>
             <ActivityIndicator
@@ -30,22 +31,4 @@ export default class Loader extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    backgroundColor: '#00000040'
-  },
-  activityIndicatorWrapper: {
-    backgroundColor: '#FFFFFF',
-    height: 100,
-    width: 100,
-    borderRadius: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-around'
-  }
-});
 
