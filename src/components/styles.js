@@ -58,7 +58,10 @@ const styles = StyleSheet.create({
       },
     //   device picker
     device_picker: { height: 50, width: 100 },
-
+    //   aditional buttons
+    buttons: {
+        marginTop: 15,
+    }
 });
 
 export default styles;
