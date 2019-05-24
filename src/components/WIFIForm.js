@@ -41,10 +41,10 @@ export default class WIFIForm extends React.Component {
   onSend() {
     const data = {
       request: 'setWIFIData',
-      network: this.props.network,
+      network: this.state.network,
       password: this.state.routerPassword,
     };
-
+    
     writeToDevice(JSON.stringify(data));
     this.props.onChangeActivity(true);
     this.setState({
@@ -66,7 +66,7 @@ export default class WIFIForm extends React.Component {
     return (
       <View>
         <Form>
-          <Item>
+          <Item picker>
 
             <Text style={styles.text_farm}> Виберіть мережу:</Text>
 

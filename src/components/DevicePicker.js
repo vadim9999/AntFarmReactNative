@@ -32,7 +32,7 @@ export default class DevicePicker extends React.Component {
     return (
       <Picker
         selectedValue={this.state.device}
-        style={styles.device_picker}
+        
         onValueChange={(itemValue, itemIndex) => {
           this.setState({ device: itemValue });
           this.props.getItem(itemValue);

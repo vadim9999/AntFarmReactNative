@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:18
     },
-    // network picker
-    network_picker:
-        { height: 50, width: '100%' },
+        
     // Loader
     modalBackground: {
         flex: 1,
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
         width: '100%'
       },
     //   device picker
-    device_picker: { height: 50, width: 100 },
+    // device_picker: { height: 50, width: 100 },
     //   aditional buttons
     buttons: {
         marginTop: 15,

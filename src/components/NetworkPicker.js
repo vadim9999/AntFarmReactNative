@@ -27,7 +27,6 @@ export default class NetworkPicker extends React.Component {
       <Picker
         enabled={this.props.enabled}
         selectedValue={this.state.network}
-        style={styles.network_picker}
         onValueChange={(itemValue, itemIndex) => {
           console.log('Changed values');
           this.setState({ network: itemValue });
