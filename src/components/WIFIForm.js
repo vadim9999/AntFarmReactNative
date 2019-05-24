@@ -68,7 +68,7 @@ export default class WIFIForm extends React.Component {
         <Form>
           <Item>
 
-            <Text> Виберіть мережу:</Text>
+            <Text style={styles.text_farm}> Виберіть мережу:</Text>
 
             <NetworkPicker
               setNetwork={this.setNetwork}

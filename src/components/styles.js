@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
     },
+    text_farm:{
+        fontWeight:'bold',
+        fontSize:18
+    },
     // network picker
     network_picker:
         { height: 50, width: '100%' },

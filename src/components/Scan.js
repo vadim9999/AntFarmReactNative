@@ -82,7 +82,7 @@ export default class Scan extends React.Component {
         <Form style={styles.scan_form}>
           <Item picker>
 
-            <Text> Виберіть ферму:</Text>
+            <Text style={styles.text_farm}> Виберіть ферму:</Text>
 
             <DevicePicker
               getItem={this.getItem}

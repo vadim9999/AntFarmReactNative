@@ -27,7 +27,7 @@ export default class AditionalButtons extends React.Component {
           primary
           onPress={this.props.onRefreshWIFI}
           disabled={!this.props.editable}
-          style={styles.buttons}
+
         >
           <Text>Оновити список</Text>
         </Button>

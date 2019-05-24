@@ -20,15 +20,15 @@ import AditionalButtons from '../../components/AditionalButtons';
 import WIFIForm from '../../components/WIFIForm';
 
 import Loader from '../../components/Loader';
-import image from './background/86.jpg';
+import image from '../background/86.jpg';
 
 import styles from './styles';
 
 export default class MainScreen extends React.Component {
-  // static navigationOptions = {
-  //   drawerLabel: 'Головна',
+  static navigationOptions = {
+    drawerLabel: 'Головна',
 
-  // };
+  };
 
   constructor(props) {
     super(props);
@@ -169,7 +169,7 @@ export default class MainScreen extends React.Component {
             <Row size={80}>
               <KeyboardShift>
                 {() => (
-                  <View style={wifi_row}>
+                  <View style={styles.wifi_row}>
                     <WIFIForm
                       network={this.state.network}
                       onChangeActivity={this.onChangeActivity}
