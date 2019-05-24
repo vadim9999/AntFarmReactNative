@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     mb15: {
         marginBottom: 20
       },
+    scan_row:{ padding: 20 },
+    wifi_row:{ padding: 20 }
+
 });
 
 export default styles
