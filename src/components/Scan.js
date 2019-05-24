@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet,  View, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Alert } from 'react-native';
 import { writeToDevice, onStartScan, connectToDevice } from "../selector/selector"
 import DevicePicker from "./DevicePicker"
 import {
-   
+
   Button,
   Text,
   Input,
@@ -15,7 +15,7 @@ import {
   Picker,
   Row,
   Spinner
- 
+
 } from "native-base";
 
 export default class Scan extends React.Component {
@@ -48,7 +48,7 @@ export default class Scan extends React.Component {
         "request": "getWIFIData"
       }
       writeToDevice(JSON.stringify(data))
-     
+
     }).catch((ex) => {
       Alert.alert('Сталася помилка при підключенні до ферми')
       console.warn(ex);
@@ -90,38 +90,36 @@ export default class Scan extends React.Component {
   }
 
   render() {
-   
+
     return (
       <View style={styles.scan_block}>
-      <Form style={{marginBottom:5}}>
-            <Item picker>
-            
-            <Text> Виберіть ферму:</Text>
-            
-            <DevicePicker
-            getItem={this.getItem}
-            devices={this.state.devices}
-          />
-            </Item>
-            
-          </Form>
-       
-        
-        
-        <View style={styles.button_block}>
-        <Button
-        onPress={this.onScan}
+        <Form style={{ marginBottom: 5 }}>
+          <Item picker>
 
-        rounded>
-          <ActivityIndicator animating={this.state.activity} style={{marginLeft:5}} size="small" color="red" />
+            <Text> Виберіть ферму:</Text>
+
+            <DevicePicker
+              getItem={this.getItem}
+              devices={this.state.devices}
+            />
+          </Item>
+
+        </Form>
+
+        <View style={styles.button_block}>
+          <Button
+            onPress={this.onScan}
+
+            rounded>
+            <ActivityIndicator animating={this.state.activity} style={{ marginLeft: 5 }} size="small" color="red" />
             <Text>Сканувати</Text>
           </Button>
-          <Button 
-          onPress={this.onConnect}
-          rounded>
+          <Button
+            onPress={this.onConnect}
+            rounded>
             <Text>Підключитися</Text>
           </Button>
-          
+
         </View>
       </View>
     )
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
   },
   button_block: {
     flexDirection: 'row',
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
   buttons: {
     backgroundColor: 'steelblue',
@@ -147,6 +145,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     justifyContent: "center",
-    
+
   }
 });

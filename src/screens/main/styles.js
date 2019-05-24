@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, Text, View, ImageBackground, Button, TextInput, CheckBox } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 50,
         justifyContent: "center"
-    },
-    wifi_form: {
-        flex: 2
     },
     textInput: {
         height: 40,
