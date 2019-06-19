@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import {
   Button,
   Text,
@@ -39,17 +39,21 @@ export default class WIFIForm extends React.Component {
   }
 
   onSend() {
-    const data = {
-      request: 'setWIFIData',
-      network: this.state.network,
-      password: this.state.routerPassword,
-    };
-    
-    writeToDevice(JSON.stringify(data));
-    this.props.onChangeActivity(true);
-    this.setState({
-      routerPassword: '',
-    });
+    if (this.state.network.length > 0 && this.state.routerPassword.length > 0){
+      const data = {
+        request: 'setWIFIData',
+        network: this.state.network,
+        password: this.state.routerPassword,
+      };
+      
+      writeToDevice(JSON.stringify(data));
+      this.props.onChangeActivity(true);
+      this.setState({
+        routerPassword: '',
+      });
+    }else{
+      Alert.alert('Виберіть мережу та введіть пароль');
+    }
   }
 
   onChangeValuePassRouter(routerPassword) {
