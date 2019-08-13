@@ -1,6 +1,6 @@
 # AntFarmReactNative
 
-This project written on React Native. 
+This project written on React Native. Migrated from https://github.com/vadim9999/react-native-ant-farm because of Expo bug. Can't build apk with Easy Bluetooth Classic
 
 Technologies that was used to create app:
 - React Native
