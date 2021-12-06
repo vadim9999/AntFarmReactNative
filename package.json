@@ -8,28 +8,28 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "easy-bluetooth-classic": "^1.0.4",
-    "native-base": "^2.12.1",
-    "react": "16.8.3",
-    "react-native": "0.59.8",
-    "react-native-easy-grid": "^0.2.1",
-    "react-native-gesture-handler": "^1.2.1",
-    "react-navigation": "^3.11.0",
-    "uuid": "^3.3.2"
+    "easy-bluetooth-classic": "1.0.4",
+    "native-base": "3.2.2",
+    "react": "17.0.2",
+    "react-native": "0.66.3",
+    "react-native-easy-grid": "0.2.2",
+    "react-native-gesture-handler": "2.0.0",
+    "react-navigation": "4.4.4",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/runtime": "^7.4.4",
-    "babel-jest": "^24.8.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.0",
-    "eslint-plugin-react-native": "^3.7.0",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.54.1",
-    "react-test-renderer": "16.8.3"
+    "@babel/core": "7.16.0",
+    "@babel/runtime": "^7.16.3",
+    "babel-jest": "27.4.2",
+    "eslint": "8.4.0",
+    "eslint-config-airbnb": "19.0.2",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react-native": "3.11.0",
+    "jest": "27.4.3",
+    "metro-react-native-babel-preset": "0.66.2",
+    "react-test-renderer": "17.0.2"
   },
   "jest": {
     "preset": "react-native"
