@@ -4,11 +4,12 @@ import android.app.Application;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+
+// import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
       // TODO find out can be autolinked
       // new RNGestureHandlerPackage(),
       // new ClassicPackage()
+      // packages.add(new ClassicPackage());
       return packages;
     }
 
