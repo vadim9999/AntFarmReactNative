@@ -149,8 +149,8 @@ android {
 }
 
 dependencies {
-    // implementation project(':react-native-gesture-handler')
-    // implementation project(':easy-bluetooth-classic')
+    implementation project(':react-native-gesture-handler')
+    implementation project(':easy-bluetooth-classic')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -162,5 +162,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
