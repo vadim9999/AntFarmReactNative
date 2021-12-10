@@ -45,9 +45,9 @@ allprojects {
         }
         google()
         jcenter()
-        // TODO find out what to do
-        // maven {
-        //      url "https://jitpack.io" 
-        // }
+        // NOTE needs for easy-bluetooth-classic library
+        maven {
+             url "https://jitpack.io" 
+        }
     }
 }
