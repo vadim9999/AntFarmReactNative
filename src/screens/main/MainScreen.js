@@ -1,30 +1,24 @@
 import React from 'react';
-import {
-  Alert, View, ImageBackground,
-} from 'react-native';
+import { Alert, View, ImageBackground } from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
-import {
-  Container,
-  Header,
-  Title,
-  Button,
-  Icon,
-  Left,
-  Body,
-} from 'native-base';
+import { Button, Icon, Container } from 'native-base';
 import { Row, Grid } from 'react-native-easy-grid';
 import Scan from '../../components/Scan';
-import { init, writeToDevice, getArrWithConnNetwork } from '../../selector/selector';
-import KeyboardShift from '../../components/KeyboardShift';
-import AditionalButtons from '../../components/AditionalButtons';
-import WIFIForm from '../../components/WIFIForm';
+import {
+  init,
+  writeToDevice,
+  getArrWithConnNetwork,
+} from '../../selector/selector';
+// import KeyboardShift from '../../components/KeyboardShift';
+// import AditionalButtons from '../../components/AditionalButtons';
+// import WIFIForm from '../../components/WIFIForm';
 
 import Loader from '../../components/Loader';
-import image from '../background/86.jpg';
+// import image from '../background/86.jpg';
 
 import styles from './styles';
 
-export default class MainScreen extends React.Component {
+class MainScreen extends React.Component {
   // static navigationOptions = {
   //   drawerLabel: 'Головна',
 
@@ -47,7 +41,9 @@ export default class MainScreen extends React.Component {
 
   componentWillMount() {
     init();
-    this.onDataReadEvent = EasyBluetooth.addOnDataReadListener(this.onDataRead.bind(this));
+    this.onDataReadEvent = EasyBluetooth.addOnDataReadListener(
+      this.onDataRead.bind(this),
+    );
   }
 
   componentWillUnmount() {
@@ -62,11 +58,9 @@ export default class MainScreen extends React.Component {
   }
 
   onChangeActivity(activity) {
-    this.setState(
-      {
-        activity,
-      },
-    );
+    this.setState({
+      activity,
+    });
   }
 
   onRefreshWIFI() {
@@ -115,7 +109,7 @@ export default class MainScreen extends React.Component {
         break;
 
       case 'getIP':
-        if (receivedData.ip != undefined & receivedData.ip != 'NoIP') {
+        if ((receivedData.ip != undefined) & (receivedData.ip != 'NoIP')) {
           Alert.alert(receivedData.ip);
         } else {
           Alert.alert('Помилка перевірте підключення');
@@ -136,37 +130,30 @@ export default class MainScreen extends React.Component {
 
   render() {
     return (
-
       <Container>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.openDrawer()}
-            >
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Мурашина ферма</Title>
-          </Body>
+        <Box>Hello</Box>
+        {/* <Header> */}
+        {/* // <Left> */}
+        {/* <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+          <Icon name="ios-menu" />
+        </Button> */}
+        {/* //  </Left>  */}
+        {/* // <Body>
+          //   <Title>Мурашина ферма</Title>
+          // </Body> */}
+        {/* </Header> */}
+        {/* // <ImageBackground source={image} style={styles.imageBackground}> */}
+        <Scan enableEditing={this.enableEditing} />
+        {/* <Box>Here</Box> */}
 
-        </Header>
-        <ImageBackground source={image} style={styles.imageBackground}>
-
-          <Grid>
-            <Row size={20} style={styles.scan_row}>
-
-              <Loader
-                loading={this.state.activity}
-                onChangeActivity={this.onChangeActivity}
-              />
-              <Scan
-                enableEditing={this.enableEditing}
-              />
-
-            </Row>
-            <Row size={80}>
+        {/* <Grid>
+          <Row size={20} style={styles.scan_row}>
+            <Loader
+              loading={this.state.activity}
+              onChangeActivity={this.onChangeActivity}
+            />
+          </Row>
+          <Row size={80}>
               <KeyboardShift>
                 {() => (
                   <View style={styles.wifi_row}>
@@ -186,9 +173,12 @@ export default class MainScreen extends React.Component {
                 }
               </KeyboardShift>
             </Row>
-          </Grid>
-        </ImageBackground>
+        </Grid> */}
+
+        {/* </ImageBackground> */}
       </Container>
     );
   }
 }
+
+export default MainScreen;
