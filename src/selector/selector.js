@@ -6,10 +6,11 @@ config = {
   bufferSize: 1024,
   characterDelimiter: '\n',
 };
-
+// TODO if it is not using remove it
 function getBluetooth() {
   return EasyBluetooth;
 }
+// TODO create class and hide all this stuff into it
 function init() {
   // TODO what is the config ?
   EasyBluetooth.init(this.config)
@@ -31,7 +32,7 @@ function onStartScan() {
 
       for (var i = 0, len = devices.length; i < len; i++)
         obj[devices[i]['address']] = devices[i];
-
+      // TODO so strange logic refactor this
       var result = new Array();
       for (var address in obj) result.push(obj[address]);
       // console.log(result);
@@ -58,12 +59,14 @@ function bindListeners(obj) {
 }
 function onDeviceFound(device) {
   console.log('onDeviceFound');
+  // TODO add notification about success founded devices
   console.log(device);
 }
 
 function writeToDevice(message) {
   EasyBluetooth.write(message)
     .then(() => {
+      // TODO add notification about success operation
       console.log('Writing...');
     })
     .catch(ex => {
@@ -72,9 +75,11 @@ function writeToDevice(message) {
 }
 
 function getThis(that) {
+  // TODO looks like bad code
   console.log(that);
 }
 
+// TODO change name from conn to connection
 function getArrWithConnNetwork(networks, connectedNetwork) {
   if (connectedNetwork !== '') {
     var index = networks.indexOf(connectedNetwork);
