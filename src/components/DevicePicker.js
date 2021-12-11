@@ -45,6 +45,18 @@ export default class DevicePicker extends React.Component {
 
   render() {
     const { devices } = this.props;
+
+    const deviceList = devices?.length
+      ? devices.map(device => {
+          const hasPair = device.uuids.length ? 'Пара' : '';
+
+          return {
+            label: `${device.name} ${device.address}${hasPair ? ' Pair' : ''}`,
+            address: device.address,
+          };
+        })
+      : [];
+
     return (
       <Select
         minWidth="200"
@@ -60,20 +72,9 @@ export default class DevicePicker extends React.Component {
           endIcon: <CheckIcon size={5} />,
         }}
         mt="1">
-        {devices.length
-          ? devices.map.map(device => {
-              const hasPair = device.uuids.length ? 'Пара' : '';
-
-              return (
-                <Select.Item
-                  label={`${device.name ?? 'No name'} ${
-                    device.address
-                  } ${hasPair}`}
-                  value="ux"
-                />
-              );
-            })
-          : []}
+        {deviceList.map(device => (
+          <Select.Item label={device.label} value={device.address} />
+        ))}
       </Select>
       // <Picker
       //   selectedValue={this.state.device}
