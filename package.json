@@ -16,7 +16,7 @@
     "react-native": "0.66.4",
     "react-native-easy-grid": "^0.2.1",
     "react-native-gesture-handler": "^1.2.1",
-    "react-navigation": "^3.11.0",
+    "react-navigation": "^4.4.4",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
