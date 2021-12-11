@@ -11,7 +11,7 @@
     "easy-bluetooth-classic": "^1.0.4",
     "native-base": "^2.12.1",
     "react": "17.0.2",
-    "react-native": "0.66.0",
+    "react-native": "0.66.4",
     "react-native-easy-grid": "^0.2.1",
     "react-native-gesture-handler": "^1.2.1",
     "react-navigation": "^3.11.0",
