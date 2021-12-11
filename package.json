@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
     "easy-bluetooth-classic": "^1.0.4",
-    "native-base": "^2.12.1",
+    "native-base": "^3.2.2",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-easy-grid": "^0.2.1",
