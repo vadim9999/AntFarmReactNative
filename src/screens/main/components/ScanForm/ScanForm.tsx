@@ -1,14 +1,26 @@
 import React from 'react';
 import { ActivityIndicator, Alert } from 'react-native';
-import { Button, Text, Form, Item, FormControl, View, Box } from 'native-base';
+import {
+  Button,
+  Text,
+  Form,
+  Item,
+  FormControl,
+  View,
+  Box,
+  IconButton,
+  SearchIcon,
+} from 'native-base';
 import {
   writeToDevice,
   onStartScan,
   connectToDevice,
-} from '../selector/selector';
-import DevicePicker from './DevicePicker';
+} from '../../../../selector/selector';
+import DevicePicker from '../DevicePicker/DevicePicker';
+// import { AntDesign } from '@expo/vector-icons';
 
-import styles from './styles';
+import styles from '../../../../components/styles';
+import { BluetoothDevice } from 'services/bluetooth-service/types';
 
 const mockDevices = [
   {
@@ -18,11 +30,16 @@ const mockDevices = [
   },
 ];
 
+interface Props {}
 
+interface State {
+  device: string;
+  activity: boolean;
+  devices: BluetoothDevice[];
+}
 
-// TODO rename to other name ScanForm move it to screens component folder
-export default class Scan extends React.Component {
-  constructor(props) {
+export default class ScanForm extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       device: '',
@@ -31,7 +48,7 @@ export default class Scan extends React.Component {
     };
     this.onScan = this.onScan.bind(this);
     this.onConnect = this.onConnect.bind(this);
-    this.getItem = this.getItem.bind(this);
+    this.setBluetoothDevice = this.setBluetoothDevice.bind(this);
   }
 
   // TODO fix error
@@ -85,34 +102,42 @@ export default class Scan extends React.Component {
       });
   }
 
-  getItem(itemValue) {
+  setBluetoothDevice(itemValue: string) {
     this.setState({ device: itemValue });
   }
 
   render() {
     return (
       <>
-        <FormControl>
+        <FormControl isRequired isInvalid={!this.state.device}>
           <FormControl.Label _text={{ bold: true }}>
             Виберіть ферму
           </FormControl.Label>
-          {/* <Item picker> */}
-          {/* <Text style={styles.text_farm}> Виберіть ферму:</Text> */}
-
-          <DevicePicker getItem={this.getItem} devices={this.state.devices} />
-          {/* </Item> */}
+          <DevicePicker
+            setBluetoothDevice={this.setBluetoothDevice}
+            devices={this.state.devices}
+          />
         </FormControl>
+        {/* TODO make this button like a refresh on the right from select */}
+        <IconButton
+          colorScheme="indigo"
+          // key={variant}
+          variant="solid"
+          size="sm"
+          onPress={this.onScan}
+          icon={<SearchIcon />}
+        />
+        {/* <Button onPress={this.onScan}>
+          <ActivityIndicator
+            animating={this.state.activity}
+            style={styles.spinner}
+            size="small"
+            color="red"
+          />
+        </Button> */}
         <View style={styles.scan_block}>
-          <Box>He</Box>
-
           {/* <View style={styles.button_block}>
-          <Button
-            onPress={this.onScan}
-            rounded
-          >
-            <ActivityIndicator animating={this.state.activity} style={styles.spinner} size="small" color="red" />
-            <Text>Сканувати</Text>
-          </Button>
+          
           <Button
             onPress={this.onConnect}
             rounded

@@ -1,19 +1,15 @@
 import React from 'react';
 import { Alert, View, ImageBackground } from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
-import { Button, Icon, Container } from 'native-base';
+import { Button, Icon, Container, SearchIcon } from 'native-base';
 import { Row, Grid } from 'react-native-easy-grid';
-import Scan from 'components/Scan';
-import {
-  init,
-  writeToDevice,
-  getArrWithConnNetwork,
-} from '../../selector/selector';
+import Scan from './components/ScanForm/ScanForm';
+import { init, writeToDevice, getArrWithConnNetwork } from 'selector/selector';
 // import KeyboardShift from '../../components/KeyboardShift';
 // import AditionalButtons from '../../components/AditionalButtons';
 // import WIFIForm from '../../components/WIFIForm';
 
-import Loader from '../../components/Loader';
+// import Loader from '../../components/Loader';
 // import image from '../background/86.jpg';
 
 import styles from './styles';

@@ -1,15 +1,20 @@
 import React from 'react';
 import { Select, CheckIcon } from 'native-base';
-import uuidv1 from 'uuid/v1';
-import styles from './styles';
-import { Device } from '../services/bluetooth-service/types';
+// import uuidv1 from 'uuid/v1';
+// import styles from '../../../../components/styles';
+import { BluetoothDevice } from 'services/bluetooth-service/types';
 
 interface Props {
-  devices: Device[];
+  devices: BluetoothDevice[];
+  setBluetoothDevice: (itemValue: string) => void;
 }
 
-export default class DevicePicker extends React.Component<Props> {
-  constructor(props) {
+interface State {
+  device: string;
+}
+
+export default class DevicePicker extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       device: '',
@@ -65,14 +70,15 @@ export default class DevicePicker extends React.Component<Props> {
 
     return (
       <Select
-        minWidth="200"
+        minWidth="100"
+        maxWidth="200"
         accessibilityLabel="Виберіть ферму"
         placeholder="Виберіть ферму"
         selectedValue={this.state.device}
         // TODO move into class fanction
         onValueChange={itemValue => {
           this.setState({ device: itemValue });
-          this.props.getItem(itemValue);
+          this.props.setBluetoothDevice(itemValue);
         }}
         _selectedItem={{
           bg: 'teal.600',
@@ -81,7 +87,7 @@ export default class DevicePicker extends React.Component<Props> {
         mt="1">
         {deviceList.map(device => (
           <Select.Item
-            key={`${device.address}/${device.uuids}`}
+            key={device.address}
             label={device.label}
             value={device.address}
           />
