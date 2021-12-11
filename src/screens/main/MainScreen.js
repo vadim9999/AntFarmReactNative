@@ -25,10 +25,10 @@ import image from '../background/86.jpg';
 import styles from './styles';
 
 export default class MainScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Головна',
+  // static navigationOptions = {
+  //   drawerLabel: 'Головна',
 
-  };
+  // };
 
   constructor(props) {
     super(props);
