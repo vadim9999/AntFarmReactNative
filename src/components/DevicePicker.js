@@ -45,6 +45,7 @@ export default class DevicePicker extends React.Component {
 
   render() {
     const { devices } = this.props;
+    console.log('devices', devices);
 
     const deviceList = devices?.length
       ? devices.map(device => {
@@ -63,6 +64,7 @@ export default class DevicePicker extends React.Component {
         accessibilityLabel="Виберіть ферму"
         placeholder="Виберіть ферму"
         selectedValue={this.state.device}
+        // TODO move into class fanction
         onValueChange={itemValue => {
           this.setState({ device: itemValue });
           this.props.getItem(itemValue);
@@ -73,7 +75,11 @@ export default class DevicePicker extends React.Component {
         }}
         mt="1">
         {deviceList.map(device => (
-          <Select.Item label={device.label} value={device.address} />
+          <Select.Item
+            key={`${device.address}/${device.uuids}`}
+            label={device.label}
+            value={device.address}
+          />
         ))}
       </Select>
       // <Picker

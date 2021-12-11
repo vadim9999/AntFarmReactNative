@@ -10,6 +10,14 @@ import DevicePicker from './DevicePicker';
 
 import styles from './styles';
 
+const mockDevices = [
+  {
+    name: 'one',
+    address: '12:12',
+    uuids: '323',
+  },
+];
+
 // TODO rename to other name ScanForm move it to screens component folder
 export default class Scan extends React.Component {
   constructor(props) {
@@ -17,7 +25,7 @@ export default class Scan extends React.Component {
     this.state = {
       device: '',
       activity: true,
-      devices: [],
+      devices: mockDevices,
     };
     this.onScan = this.onScan.bind(this);
     this.onConnect = this.onConnect.bind(this);
@@ -83,7 +91,9 @@ export default class Scan extends React.Component {
     return (
       <>
         <FormControl>
-          <FormControl.Label _text={{ bold: true }}>Name</FormControl.Label>
+          <FormControl.Label _text={{ bold: true }}>
+            Виберіть ферму
+          </FormControl.Label>
           {/* <Item picker> */}
           {/* <Text style={styles.text_farm}> Виберіть ферму:</Text> */}
 

@@ -20,9 +20,7 @@ const App = () => {
     // TODO setting up drawer
     <NavigationContainer>
       <NativeBaseProvider>
-        <Center flex={1} px="3">
-          <MainScreen />
-        </Center>
+        <MainScreen />
       </NativeBaseProvider>
     </NavigationContainer>
   );

@@ -19,6 +19,7 @@ import Loader from '../../components/Loader';
 import styles from './styles';
 
 class MainScreen extends React.Component {
+  // TODO find out what to do with it
   // static navigationOptions = {
   //   drawerLabel: 'Головна',
 
@@ -28,6 +29,7 @@ class MainScreen extends React.Component {
     super(props);
     this.state = {
       editable: false,
+      // TODO why is it commented?
       // editable: true,
       networks: '',
       activity: false,
@@ -129,9 +131,10 @@ class MainScreen extends React.Component {
   }
 
   render() {
+    // TODO split this on blocks or move into another page
     return (
       <Container>
-        <Box>Hello</Box>
+        {/* <Box>Hello</Box> */}
         {/* <Header> */}
         {/* // <Left> */}
         {/* <Button transparent onPress={() => this.props.navigation.openDrawer()}>
