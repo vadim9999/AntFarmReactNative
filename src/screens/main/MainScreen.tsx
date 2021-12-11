@@ -3,7 +3,7 @@ import { Alert, View, ImageBackground } from 'react-native';
 import EasyBluetooth from 'easy-bluetooth-classic';
 import { Button, Icon, Container } from 'native-base';
 import { Row, Grid } from 'react-native-easy-grid';
-import Scan from '../../components/Scan';
+import Scan from 'components/Scan';
 import {
   init,
   writeToDevice,

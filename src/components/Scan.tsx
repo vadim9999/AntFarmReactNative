@@ -18,6 +18,8 @@ const mockDevices = [
   },
 ];
 
+
+
 // TODO rename to other name ScanForm move it to screens component folder
 export default class Scan extends React.Component {
   constructor(props) {

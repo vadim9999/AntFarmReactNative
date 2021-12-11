@@ -2,8 +2,13 @@ import React from 'react';
 import { Select, CheckIcon } from 'native-base';
 import uuidv1 from 'uuid/v1';
 import styles from './styles';
+import { Device } from '../services/bluetooth-service/types';
 
-export default class DevicePicker extends React.Component {
+interface Props {
+  devices: Device[];
+}
+
+export default class DevicePicker extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
