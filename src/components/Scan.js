@@ -1,14 +1,11 @@
 import React from 'react';
+import { ActivityIndicator, Alert } from 'react-native';
+import { Button, Text, Form, Item, FormControl, View, Box } from 'native-base';
 import {
-  View, ActivityIndicator, Alert,
-} from 'react-native';
-import {
-  Button,
-  Text,
-  Form,
-  Item,
-} from 'native-base';
-import { writeToDevice, onStartScan, connectToDevice } from '../selector/selector';
+  writeToDevice,
+  onStartScan,
+  connectToDevice,
+} from '../selector/selector';
 import DevicePicker from './DevicePicker';
 
 import styles from './styles';
@@ -20,31 +17,35 @@ export default class Scan extends React.Component {
       device: '',
       activity: true,
       devices: [],
-
     };
     this.onScan = this.onScan.bind(this);
     this.onConnect = this.onConnect.bind(this);
     this.getItem = this.getItem.bind(this);
   }
 
-  componentWillMount() {
-    this.onScan();
-  }
+  // TODO fix error
+  // componentWillMount() {
+  //   this.onScan();
+  // }
 
   onConnect() {
-    const device = this.state.devices.find(device => device.address == this.state.device);
+    const device = this.state.devices.find(
+      device => device.address == this.state.device,
+    );
 
-    connectToDevice(device).then(() => {
-      console.log('Connected!');
-      this.props.enableEditing();
-      const data = {
-        request: 'getWIFIData',
-      };
-      writeToDevice(JSON.stringify(data));
-    }).catch((ex) => {
-      Alert.alert('Сталася помилка при підключенні до ферми');
-      console.warn(ex);
-    });
+    connectToDevice(device)
+      .then(() => {
+        console.log('Connected!');
+        this.props.enableEditing();
+        const data = {
+          request: 'getWIFIData',
+        };
+        writeToDevice(JSON.stringify(data));
+      })
+      .catch(ex => {
+        Alert.alert('Сталася помилка при підключенні до ферми');
+        console.warn(ex);
+      });
   }
 
   onScan() {
@@ -54,20 +55,21 @@ export default class Scan extends React.Component {
       });
     }
 
-    onStartScan().then((devices) => {
-      if (devices !== undefined && devices.length > 0) {
-        this.setState({
-          devices,
-          device: devices[0].address,
-          activity: false,
-        });
-      } else {
-        this.setState({
-          activity: false,
-        });
-      }
-    })
-      .catch((ex) => {
+    onStartScan()
+      .then(devices => {
+        if (devices !== undefined && devices.length > 0) {
+          this.setState({
+            devices,
+            device: devices[0].address,
+            activity: false,
+          });
+        } else {
+          this.setState({
+            activity: false,
+          });
+        }
+      })
+      .catch(ex => {
         console.warn(ex);
       });
   }
@@ -78,21 +80,19 @@ export default class Scan extends React.Component {
 
   render() {
     return (
-      <View style={styles.scan_block}>
-        <Form style={styles.scan_form}>
-          <Item picker>
+      <>
+        <FormControl>
+          <FormControl.Label _text={{ bold: true }}>Name</FormControl.Label>
+          {/* <Item picker> */}
+          {/* <Text style={styles.text_farm}> Виберіть ферму:</Text> */}
 
-            <Text style={styles.text_farm}> Виберіть ферму:</Text>
+          <DevicePicker getItem={this.getItem} devices={this.state.devices} />
+          {/* </Item> */}
+        </FormControl>
+        <View style={styles.scan_block}>
+          <Box>He</Box>
 
-            <DevicePicker
-              getItem={this.getItem}
-              devices={this.state.devices}
-            />
-          </Item>
-
-        </Form>
-
-        <View style={styles.button_block}>
+          {/* <View style={styles.button_block}>
           <Button
             onPress={this.onScan}
             rounded
@@ -107,8 +107,9 @@ export default class Scan extends React.Component {
             <Text>Підключитися</Text>
           </Button>
 
+        </View> */}
         </View>
-      </View>
+      </>
     );
   }
 }
