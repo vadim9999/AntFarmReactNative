@@ -1,9 +1,5 @@
-import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  NavigationContainer,
-  createDrawerNavigator,
-} from 'react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import AboutApplication from './screens/aboutApplication/AboutApplication';
 import MainScreen from './screens/main/MainScreen';
 
