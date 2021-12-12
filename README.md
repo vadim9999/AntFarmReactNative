@@ -8,7 +8,7 @@ Technologies that was used to create app:
 - NativeBase
 - React Navigation
 
-Migrated from `easy-bluetooth-classic` to `react-native-bluetooth-serial`
+Migrated from `easy-bluetooth-classic` to `react-native-bluetooth-classic`
 
 Tried libraries they displays name of devices as null:
 - `react-native-ble-manager`
