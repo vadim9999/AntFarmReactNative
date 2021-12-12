@@ -4,7 +4,7 @@ This project written on React Native. Migrated from https://github.com/vadim9999
 
 Technologies that was used to create app:
 - React Native
-- Easy Bluetooth Classic 
+- react-native-bluetooth-classic 
 - NativeBase
 - React Navigation
 
