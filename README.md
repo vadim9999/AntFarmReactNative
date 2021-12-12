@@ -1,12 +1,18 @@
 # AntFarmReactNative
 
-This project written on React Native. Migrated from https://github.com/vadim9999/react-native-ant-farm because of Expo bug. Can't build apk with Easy Bluetooth Classic
+This project written on React Native. Migrated from https://github.com/vadim9999/react-native-ant-farm because of Expo bug. Can't build apk with EasyBluetoothClassic(easy-bluetooth-classic)
 
 Technologies that was used to create app:
 - React Native
 - Easy Bluetooth Classic 
 - NativeBase
 - React Navigation
+
+Migrated from `easy-bluetooth-classic` to `react-native-bluetooth-serial`
+
+Tried libraries they displays name of devices as null:
+- `react-native-ble-manager`
+- `react-native-ble-plx` 
 
 Easy Bluethooth Classic used to Search for Bluetooth devices, connect to them, receive and transfer data via client and Python server.
 
