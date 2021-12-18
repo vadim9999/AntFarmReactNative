@@ -4,6 +4,7 @@ import MainScreen from 'screens/main/MainScreen';
 import { Box } from 'native-base';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent/CustomDrawerContent';
+import BluetoothSettings from 'screens/BluetoothSettings/BluetoothSettings';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,7 +17,7 @@ function AppDrawer() {
           options={{
             headerTitle: 'Налаштування Bluetooth',
           }}
-          component={MainScreen}
+          component={BluetoothSettings}
         />
         <Drawer.Screen name="AboutApp" component={AboutApplication} />
       </Drawer.Navigator>

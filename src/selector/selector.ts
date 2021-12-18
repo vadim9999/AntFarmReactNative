@@ -1,4 +1,4 @@
-import EasyBluetooth from 'easy-bluetooth-classic';
+// import EasyBluetooth from 'easy-bluetooth-classic';
 
 config = {
   uuid: '00001101-0000-1000-8000-00805f9b34fb',

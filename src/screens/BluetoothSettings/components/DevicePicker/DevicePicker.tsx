@@ -1,9 +1,8 @@
 import React from 'react';
 import { Select, CheckIcon } from 'native-base';
+import { BluetoothDevice } from 'react-native-bluetooth-classic';
 // import uuidv1 from 'uuid/v1';
 // import styles from '../../../../components/styles';
-import { BluetoothDevice } from 'services/bluetooth-service/types';
-
 interface Props {
   devices: BluetoothDevice[];
   setBluetoothDevice: (itemValue: string) => void;
@@ -59,7 +58,9 @@ export default class DevicePicker extends React.Component<Props, State> {
 
     const deviceList = devices?.length
       ? devices.map(device => {
-          const hasPair = device.uuids.length ? 'Пара' : '';
+          // const hasPair = device.uuids.length ? 'Пара' : '';
+          // TODO fix this
+          const hasPair = false;
 
           return {
             label: `${device.name} ${device.address}${hasPair ? ' Pair' : ''}`,
@@ -70,8 +71,8 @@ export default class DevicePicker extends React.Component<Props, State> {
 
     return (
       <Select
-        minWidth="100"
-        maxWidth="200"
+        // minWidth="100"
+        // maxWidth="200"
         accessibilityLabel="Виберіть ферму"
         placeholder="Виберіть ферму"
         selectedValue={this.state.device}
