@@ -33,7 +33,7 @@ const CustomDrawerContent: DrawerNavigationConfig['drawerContent'] = props => {
               props.state.index === 0 ? 'rgba(6, 182, 212, 0.1)' : 'transparent'
             }
             onPress={() => {
-              props.navigation.navigate('SettingsBluetooth');
+              props.navigation.navigate('BluetoothSettings');
             }}>
             <HStack space="7" alignItems="center">
               <Icon
@@ -54,7 +54,7 @@ const CustomDrawerContent: DrawerNavigationConfig['drawerContent'] = props => {
               props.state.index === 1 ? 'rgba(6, 182, 212, 0.1)' : 'transparent'
             }
             onPress={() => {
-              props.navigation.navigate('SettingsBluetooth');
+              props.navigation.navigate('WifiSettings');
             }}>
             <HStack space="7" alignItems="center">
               <Icon
@@ -72,10 +72,10 @@ const CustomDrawerContent: DrawerNavigationConfig['drawerContent'] = props => {
             py="3"
             rounded="md"
             bg={
-              props.state.index === 1 ? 'rgba(6, 182, 212, 0.1)' : 'transparent'
+              props.state.index === 2 ? 'rgba(6, 182, 212, 0.1)' : 'transparent'
             }
             onPress={() => {
-              props.navigation.navigate('SettingsBluetooth');
+              props.navigation.navigate('AboutApp');
             }}>
             <HStack space="7" alignItems="center">
               <Icon
