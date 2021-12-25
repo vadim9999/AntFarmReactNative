@@ -1,7 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native-svg';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 export default class WifiSettings extends React.Component {
+  componentDidMount = async () => {
+    // const connected = await RNBluetoothClassic.getConnectedDevice;
+    // console.log('connected', connected);
+  };
   // this.readSubscription = foundedDevice.onDataReceived(response => {
   //   try {
   //     const receivedData = JSON.parse(response.data);
