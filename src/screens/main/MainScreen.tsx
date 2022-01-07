@@ -1,8 +1,6 @@
 import React from 'react';
 import { Alert, View, ImageBackground } from 'react-native';
-import EasyBluetooth from 'easy-bluetooth-classic';
 import { Button, Icon, Container, SearchIcon, Box } from 'native-base';
-import { Row, Grid } from 'react-native-easy-grid';
 // import Scan from './components/ScanForm/ScanForm';
 // import { init, writeToDevice, getArrWithConnNetwork } from 'selector/selector';
 // import bluetoothService from 'services/bluetooth-service/bluetooth-service';
@@ -13,7 +11,7 @@ import { Row, Grid } from 'react-native-easy-grid';
 // import Loader from '../../components/Loader';
 // import image from '../background/86.jpg';
 
-import styles from './styles';
+// import styles from './styles';
 
 class MainScreen extends React.Component {
   constructor(props) {

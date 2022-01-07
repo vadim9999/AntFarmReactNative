@@ -4,7 +4,6 @@ import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { ScanFormValues } from './components/ScanForm/ScanForm.types';
 import { Props, State } from './BluetoothSettings.types';
-import { PermissionsAndroid } from 'react-native';
 import { requestAccessFineLocationPermission } from './helper';
 
 const mockDevices = [
@@ -132,11 +131,11 @@ class BluetoothSettings extends React.Component<Props, State> {
           animating={this.state.isLoading}
         />
         <Box>
-          <ScanForm
+          {/* <ScanForm
             onRefresh={this.onScan}
             onConnect={this.onConnect}
             devices={deviceList}
-          />
+          /> */}
         </Box>
         <Box>
           <Text>Інформація</Text>

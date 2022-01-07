@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native-svg';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from 'redux/store/store';
 import { setDeviceAddress } from 'redux/slices/deviceSlice';
 import { getDeviceAddress } from 'redux/selectors/selector';
-import { Box, Button } from 'native-base';
+import { Box, Button, Text } from 'native-base';
 
 interface Props extends PropsFromRedux {}
 
