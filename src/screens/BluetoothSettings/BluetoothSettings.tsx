@@ -5,6 +5,7 @@ import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { ScanFormValues } from './components/ScanForm/ScanForm.types';
 import { Props, State } from './BluetoothSettings.types';
 import { PermissionsAndroid } from 'react-native';
+import { requestAccessFineLocationPermission } from './helper';
 
 const mockDevices = [
   {
@@ -13,23 +14,7 @@ const mockDevices = [
   },
 ];
 
-const requestAccessFineLocationPermission = async () => {
-  const granted = await PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    {
-      title: 'Access fine location required for discovery',
-      message:
-        'In order to perform discovery, you must enable/allow ' +
-        'fine location access.',
-      buttonNeutral: 'Ask Me Later',
-      buttonNegative: 'Cancel',
-      buttonPositive: 'OK',
-    },
-  );
-  return granted === PermissionsAndroid.RESULTS.GRANTED;
-};
-
-export default class BluetoothSettings extends React.Component<Props, State> {
+class BluetoothSettings extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -160,3 +145,5 @@ export default class BluetoothSettings extends React.Component<Props, State> {
     );
   }
 }
+
+export default BluetoothSettings;
