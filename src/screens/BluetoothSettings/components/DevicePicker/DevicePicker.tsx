@@ -39,8 +39,7 @@ export default class DevicePicker extends React.Component<Props, State> {
         _selectedItem={{
           bg: 'teal.600',
           endIcon: <CheckIcon size={5} />,
-        }}
-        mt="1">
+        }}>
         {deviceList.map(device => (
           <Select.Item
             key={device.address}

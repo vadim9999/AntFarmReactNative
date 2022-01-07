@@ -131,11 +131,11 @@ class BluetoothSettings extends React.Component<Props, State> {
           animating={this.state.isLoading}
         />
         <Box>
-          {/* <ScanForm
+          <ScanForm
             onRefresh={this.onScan}
             onConnect={this.onConnect}
             devices={deviceList}
-          /> */}
+          />
         </Box>
         <Box>
           <Text>Інформація</Text>
