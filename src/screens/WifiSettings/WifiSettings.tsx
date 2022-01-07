@@ -1,8 +1,14 @@
 import React from 'react';
 import { Text } from 'react-native-svg';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from 'redux/store/store';
+import { setDeviceAddress } from 'redux/slices/deviceSlice';
+import { getDeviceAddress } from 'redux/selectors/selector';
 
-export default class WifiSettings extends React.Component {
+interface Props extends PropsFromRedux {}
+
+class WifiSettings extends React.Component<Props, {}> {
   componentDidMount = async () => {
     // const connected = await RNBluetoothClassic.getConnectedDevice;
     // console.log('connected', connected);
@@ -44,6 +50,20 @@ export default class WifiSettings extends React.Component {
   //   console.log('sentSuccess');
   // }
   render() {
+    console.log(this.props.deviceAddress);
+
     return <Text>H</Text>;
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  deviceAddress: getDeviceAddress(state),
+});
+
+const mapDispatchToProps = { setDeviceAddress };
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(WifiSettings);
