@@ -5,6 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from 'redux/store/store';
 import { setDeviceAddress } from 'redux/slices/deviceSlice';
 import { getDeviceAddress } from 'redux/selectors/selector';
+import { Box, Button } from 'native-base';
 
 interface Props extends PropsFromRedux {}
 
@@ -52,7 +53,12 @@ class WifiSettings extends React.Component<Props, {}> {
   render() {
     console.log(this.props.deviceAddress);
 
-    return <Text>H</Text>;
+    return (
+      <Box>
+        <Text>Address: {this.props.deviceAddress}</Text>
+        <Button onPress={() => this.props.setDeviceAddress('1234:1234')}>Set state</Button>
+      </Box>
+    );
   }
 }
 
