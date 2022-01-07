@@ -10,7 +10,8 @@
     "test": "jest",
     "lint": "eslint .",
     "ts": "tsc",
-    "ts:watch": "tsc --watch"
+    "ts:watch": "tsc --watch",
+    "react-devtools": "react-devtools"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -43,6 +44,7 @@
     "eslint": "8.5.0",
     "jest": "^27.4.5",
     "metro-react-native-babel-preset": "^0.66.2",
+    "react-devtools": "^4.22.1",
     "react-test-renderer": "17.0.2",
     "reactotron-react-native": "^5.0.1",
     "reactotron-redux": "^3.1.3",
