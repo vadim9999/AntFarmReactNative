@@ -6,6 +6,7 @@ export const store = configureStore({
   reducer: {
     device: deviceReducer,
   },
+  // TODO fix this problem
   enhancers: [ReactotronConfig?.createEnhancer()],
 });
 
