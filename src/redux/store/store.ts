@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import deviceReducer from 'redux/slices/deviceSlice';
+import ReactotronConfig from 'ReactotronConfig';
 
 export const store = configureStore({
   reducer: {
     device: deviceReducer,
   },
+  enhancers: [ReactotronConfig?.createEnhancer()],
 });
 
 export type RootState = ReturnType<typeof store.getState>;
