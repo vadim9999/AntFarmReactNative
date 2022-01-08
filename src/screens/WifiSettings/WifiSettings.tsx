@@ -5,6 +5,7 @@ import { RootState } from 'redux/store/store';
 import { setDeviceAddress } from 'redux/slices/deviceSlice';
 import { getDeviceAddress } from 'redux/selectors/selector';
 import { Box, Button, Text } from 'native-base';
+import { connector, PropsFromRedux } from './connector';
 
 interface Props extends PropsFromRedux {}
 
@@ -55,20 +56,12 @@ class WifiSettings extends React.Component<Props, {}> {
     return (
       <Box>
         <Text>Address: {this.props.deviceAddress}</Text>
-        <Button onPress={() => this.props.setDeviceAddress('1234:1234')}>Set state</Button>
+        <Button onPress={() => this.props.setDeviceAddress('1234:1234')}>
+          Set state
+        </Button>
       </Box>
     );
   }
 }
-
-const mapStateToProps = (state: RootState) => ({
-  deviceAddress: getDeviceAddress(state),
-});
-
-const mapDispatchToProps = { setDeviceAddress };
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export default connector(WifiSettings);

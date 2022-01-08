@@ -1,4 +1,5 @@
-import { PermissionsAndroid } from "react-native";
+import { PermissionsAndroid } from 'react-native';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 export const requestAccessFineLocationPermission = async () => {
   const granted = await PermissionsAndroid.request(
@@ -14,4 +15,18 @@ export const requestAccessFineLocationPermission = async () => {
     },
   );
   return granted === PermissionsAndroid.RESULTS.GRANTED;
+};
+
+export const checkBluetooth = async () => {
+  let granted = await requestAccessFineLocationPermission();
+
+  if (!granted) {
+    throw new Error('Access fine location was not granted');
+  }
+
+  let enabled = await RNBluetoothClassic.isBluetoothEnabled();
+
+  if (!enabled) {
+    throw new Error('Bluetooth is not enabled! Enable it!');
+  }
 };

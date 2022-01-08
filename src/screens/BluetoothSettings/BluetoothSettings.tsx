@@ -4,7 +4,8 @@ import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { ScanFormValues } from './components/ScanForm/ScanForm.types';
 import { Props, State } from './BluetoothSettings.types';
-import { requestAccessFineLocationPermission } from './helper';
+import { checkBluetooth } from './helper';
+import { connector, PropsFromRedux } from './connector';
 
 const mockDevices = [
   {
@@ -13,8 +14,10 @@ const mockDevices = [
   },
 ];
 
-class BluetoothSettings extends React.Component<Props, State> {
-  constructor(props: Props) {
+type BluetoothSettingsProps = Props & PropsFromRedux;
+
+class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
+  constructor(props: BluetoothSettingsProps) {
     super(props);
 
     this.state = {
@@ -25,28 +28,13 @@ class BluetoothSettings extends React.Component<Props, State> {
   }
 
   // readSubscription: BluetoothEventSubscription | null;
-  componentDidMount = async () => {
+  async componentDidMount() {
     try {
-      let isBluetoothAvailable =
-        await RNBluetoothClassic.isBluetoothAvailable();
-      console.log('isBluetoothAvailable', isBluetoothAvailable);
-
-      if (!isBluetoothAvailable) {
-        throw new Error('Bluetooth is not available for current device!');
+      if (!this.props.isBluetoothAvailable) {
+        throw new Error('Bluetooth is not available on this device');
       }
 
-      let enabled = await RNBluetoothClassic.isBluetoothEnabled();
-      console.log('is enabled?', enabled);
-
-      if (!enabled) {
-        throw new Error('Bluetooth is not enabled! Enable it!');
-      }
-
-      let granted = await requestAccessFineLocationPermission();
-
-      if (!granted) {
-        throw new Error('Access fine location was not granted');
-      }
+      await checkBluetooth();
 
       RNBluetoothClassic.startDiscovery().then(devices => {
         this.setState({
@@ -62,17 +50,17 @@ class BluetoothSettings extends React.Component<Props, State> {
     } finally {
       this.setState({ isLoading: false });
     }
-  };
+  }
 
   onConnect = async (formValues: ScanFormValues) => {
     this.setState({ isLoading: true });
+
     try {
       const foundedDevice = this.state.devices.find(
         device => device.address === formValues.deviceAddress,
       );
 
       if (!foundedDevice) {
-        // TODO add Notification
         throw new Error('Device not found');
       }
 
@@ -83,10 +71,13 @@ class BluetoothSettings extends React.Component<Props, State> {
       });
 
       if (!isConnectedToAntFarm) {
-        // Alert.alert('Сталася помилка при підключенні до ферми');
         throw new Error('Failed to connect');
       }
     } catch (error) {
+      Toast.show({
+        title: (error as Error).message,
+        status: 'error',
+      });
       console.error((error as Error).message);
     } finally {
       this.setState({ isLoading: false });
@@ -145,4 +136,4 @@ class BluetoothSettings extends React.Component<Props, State> {
   }
 }
 
-export default BluetoothSettings;
+export default connector(BluetoothSettings);
