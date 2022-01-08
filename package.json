@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "ts": "tsc",
     "ts:watch": "tsc --watch",
-    "react-devtools": "react-devtools"
+    "react-devtools": "react-devtools",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -44,6 +45,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "8.5.0",
     "eslint-plugin-flowtype": "^8.0.3",
+    "husky": "^7.0.0",
     "jest": "^27.4.5",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-devtools": "^4.22.1",
