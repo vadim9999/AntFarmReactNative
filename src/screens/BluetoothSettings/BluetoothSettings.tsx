@@ -21,34 +21,39 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
     super(props);
 
     this.state = {
-      isLoading: true,
+      isLoading: false,
       devices: [],
     };
-    // this.readSubscription = null;
   }
 
-  // readSubscription: BluetoothEventSubscription | null;
-  async componentDidMount() {
-    try {
-      if (!this.props.isBluetoothAvailable) {
-        throw new Error('Bluetooth is not available on this device');
-      }
+  async componentDidUpdate(prevProps: BluetoothSettingsProps) {
+    // NOTE needs for first automated start discovering
+    if (
+      prevProps.isBluetoothAvailable !== this.props.isBluetoothAvailable &&
+      this.props.isBluetoothAvailable
+    ) {
+      try {
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({ isLoading: true });
 
-      await checkBluetooth();
+        await checkBluetooth();
 
-      RNBluetoothClassic.startDiscovery().then(devices => {
-        this.setState({
-          devices,
+        RNBluetoothClassic.startDiscovery().then(devices => {
+          this.setState({
+            devices,
+          });
         });
-      });
-    } catch (error) {
-      Toast.show({
-        title: (error as Error).message,
-        status: 'error',
-      });
-      console.error((error as Error).message);
-    } finally {
-      this.setState({ isLoading: false });
+      } catch (error) {
+        Toast.show({
+          title: (error as Error).message,
+          status: 'error',
+        });
+        // eslint-disable-next-line no-console
+        console.log((error as Error).message);
+      } finally {
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({ isLoading: false });
+      }
     }
   }
 
@@ -73,54 +78,65 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
       if (!isConnectedToAntFarm) {
         throw new Error('Failed to connect');
       }
+
+      this.props.setDeviceAddress(foundedDevice.address);
     } catch (error) {
       Toast.show({
         title: (error as Error).message,
         status: 'error',
       });
-      console.error((error as Error).message);
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
     } finally {
       this.setState({ isLoading: false });
     }
   };
 
   onScan = async () => {
-    this.setState({
-      isLoading: true,
-    });
+    try {
+      this.setState({
+        isLoading: true,
+      });
 
-    const paired = await RNBluetoothClassic.getBondedDevices();
-    console.log('paired', paired);
+      if (!this.props.isBluetoothAvailable) {
+        throw new Error('Bluetooth is not available on this device');
+      }
 
-    RNBluetoothClassic.startDiscovery()
-      .then(devices => {
+      await checkBluetooth();
+
+      RNBluetoothClassic.startDiscovery().then(devices => {
         this.setState({
           devices,
         });
-      })
-      .finally(() => {
-        this.setState({ isLoading: false });
       });
+    } catch (error) {
+      Toast.show({
+        title: (error as Error).message,
+        status: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
-    const deviceList = this.state.devices.map(device => ({
-      name: device.name,
-      address: device.address,
-    }));
+    // const deviceList = this.state.devices.map(device => ({
+    //   name: device.name,
+    //   address: device.address,
+    // }));
 
-    // const deviceList = mockDevices;
+    const deviceList = mockDevices;
     return (
       <>
         <Box>
-          <Text>Підключення з фермою відсутнє</Text>
+          {this.props.isBluetoothAvailable ? null : (
+            <Text>Bluetooth на цьому пристрої не доступний</Text>
+          )}
           <Text>Підключено до мурашиної ферми</Text>
         </Box>
-        <Spinner
-          size="lg"
-          // accessibilityLabel="Loading"
-          animating={this.state.isLoading}
-        />
+        {this.state.isLoading ? <Spinner size="lg" /> : null}
         <Box>
           <ScanForm
             onRefresh={this.onScan}
