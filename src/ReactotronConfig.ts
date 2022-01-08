@@ -4,6 +4,7 @@ import { reactotronRedux } from 'reactotron-redux';
 
 let reactotron;
 if (__DEV__) {
+  // @ts-ignore
   reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
     .configure({
       name: 'AppName',

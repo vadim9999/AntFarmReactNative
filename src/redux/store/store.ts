@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import deviceReducer from 'redux/slices/deviceSlice';
+// @ts-ignore
 import ReactotronConfig from 'ReactotronConfig';
 
 export const store = configureStore({
@@ -7,6 +8,7 @@ export const store = configureStore({
     device: deviceReducer,
   },
   // TODO fix this problem
+  // @ts-ignore
   enhancers: [ReactotronConfig?.createEnhancer()],
 });
 
