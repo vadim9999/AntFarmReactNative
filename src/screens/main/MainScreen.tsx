@@ -1,6 +1,5 @@
 import React from 'react';
-import { Alert, View, ImageBackground } from 'react-native';
-import { Button, Icon, Container, SearchIcon, Box } from 'native-base';
+import { Container, Box } from 'native-base';
 // import Scan from './components/ScanForm/ScanForm';
 // import { init, writeToDevice, getArrWithConnNetwork } from 'selector/selector';
 // import bluetoothService from 'services/bluetooth-service/bluetooth-service';
@@ -13,9 +12,10 @@ import { Button, Icon, Container, SearchIcon, Box } from 'native-base';
 
 // import styles from './styles';
 
-class MainScreen extends React.Component {
-  constructor(props) {
+class MainScreen extends React.Component<{}, {}> {
+  constructor(props: {}) {
     super(props);
+
     this.state = {
       editable: false,
       // TODO why is it commented?

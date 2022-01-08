@@ -1,14 +1,14 @@
 import React from 'react';
 import AboutApplication from 'screens/aboutApplication/AboutApplication';
-import MainScreen from 'screens/main/MainScreen';
+// import MainScreen from 'screens/main/MainScreen';
 import { Box, Toast } from 'native-base';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent/CustomDrawerContent';
 import BluetoothSettings from 'screens/BluetoothSettings/BluetoothSettings';
 import WifiSettings from 'screens/WifiSettings/WifiSettings';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
-import { connect } from 'react-redux';
-import { setIsBluetoothAvailable } from 'redux/slices/deviceSlice';
+// import { connect } from 'react-redux';
+// import { setIsBluetoothAvailable } from 'redux/slices/deviceSlice';
 import { connector, PropsFromRedux } from './connector';
 import { Props } from './AppDrawer.types';
 

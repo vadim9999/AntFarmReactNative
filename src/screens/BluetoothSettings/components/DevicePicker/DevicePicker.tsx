@@ -10,7 +10,6 @@ export default class DevicePicker extends React.Component<Props, State> {
 
   render() {
     const { devices } = this.props;
-    console.log('devices', devices);
 
     const deviceList = devices?.length
       ? devices.map(device => {

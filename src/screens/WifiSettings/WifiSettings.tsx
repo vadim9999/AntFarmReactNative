@@ -1,19 +1,22 @@
 import React from 'react';
-import RNBluetoothClassic from 'react-native-bluetooth-classic';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from 'redux/store/store';
-import { setDeviceAddress } from 'redux/slices/deviceSlice';
-import { getDeviceAddress } from 'redux/selectors/selector';
+// import RNBluetoothClassic from 'react-native-bluetooth-classic';
+// import { connect, ConnectedProps } from 'react-redux';
+// import { RootState } from 'redux/store/store';
+// import { setDeviceAddress } from 'redux/slices/deviceSlice';
+// import { getDeviceAddress } from 'redux/selectors/selector';
 import { Box, Button, Text } from 'native-base';
 import { connector, PropsFromRedux } from './connector';
 
 interface Props extends PropsFromRedux {}
 
 class WifiSettings extends React.Component<Props, {}> {
-  componentDidMount = async () => {
-    // const connected = await RNBluetoothClassic.getConnectedDevice;
-    // console.log('connected', connected);
-  };
+  constructor(props: Props) {
+    super(props);
+  }
+  // componentDidMount = async () => {
+  //   const connected = await RNBluetoothClassic.getConnectedDevice();
+  //   console.log('connected', connected);
+  // };
   // this.readSubscription = foundedDevice.onDataReceived(response => {
   //   try {
   //     const receivedData = JSON.parse(response.data);
@@ -51,8 +54,6 @@ class WifiSettings extends React.Component<Props, {}> {
   //   console.log('sentSuccess');
   // }
   render() {
-    console.log(this.props.deviceAddress);
-
     return (
       <Box>
         <Text>Address: {this.props.deviceAddress}</Text>

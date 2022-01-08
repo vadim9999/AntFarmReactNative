@@ -5,7 +5,7 @@ import { NativeBaseProvider } from 'native-base';
 import AppDrawer from 'AppDrawer/AppDrawer';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store/store';
-import AboutApplication from 'screens/aboutApplication/AboutApplication';
+// import AboutApplication from 'screens/aboutApplication/AboutApplication';
 
 const App = () => {
   return (
