@@ -1,7 +1,7 @@
 import React from 'react';
 import AboutApplication from 'screens/aboutApplication/AboutApplication';
 import MainScreen from 'screens/main/MainScreen';
-import { Box } from 'native-base';
+import { Box, Toast } from 'native-base';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent/CustomDrawerContent';
 import BluetoothSettings from 'screens/BluetoothSettings/BluetoothSettings';
@@ -14,21 +14,34 @@ import { Props } from './AppDrawer.types';
 
 const Drawer = createDrawerNavigator();
 
-class AppDrawer extends React.Component<Props & PropsFromRedux, {}> {
+type AppDrawerProps = Props & PropsFromRedux;
+
+class AppDrawer extends React.Component<AppDrawerProps, {}> {
+  constructor(props: AppDrawerProps) {
+    super(props);
+  }
+
   async componentDidMount() {
     try {
       let isBluetoothAvailable =
         await RNBluetoothClassic.isBluetoothAvailable();
+
       this.props.setIsBluetoothAvailable(isBluetoothAvailable);
-      console.log('is22', isBluetoothAvailable);
-    } catch (err) {
-      console.log("err");
+
+      if (!isBluetoothAvailable) {
+        throw new Error('Bluetooth is not available on this device');
+      }
+    } catch (error) {
+      Toast.show({
+        title: (error as Error).message,
+        status: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
     }
   }
 
   render() {
-    console.log('render');
-
     return (
       <Box safeArea flex={1}>
         <Drawer.Navigator drawerContent={CustomDrawerContent}>
