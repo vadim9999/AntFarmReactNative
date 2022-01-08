@@ -13,8 +13,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { DrawerNavigationConfig } from '@react-navigation/drawer/lib/typescript/src/types';
 
 const CustomDrawerContent: DrawerNavigationConfig['drawerContent'] = props => {
-  console.log(props.state.index);
-
   return (
     <DrawerContentScrollView {...props}>
       <VStack space="6" my="2" mx="1">
