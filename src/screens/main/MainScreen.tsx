@@ -115,13 +115,6 @@ class MainScreen extends React.Component<{}, {}> {
   //   }
   // }
 
-  // enableEditing() {
-  //   this.setState({
-  //     editable: true,
-  //     activity: true,
-  //   });
-  // }
-
   render() {
     // TODO split this on blocks or move into another page
     return (
