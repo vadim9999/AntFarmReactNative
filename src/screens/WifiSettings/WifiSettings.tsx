@@ -1,65 +1,156 @@
 import React from 'react';
-// import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import RNBluetoothClassic, {
+  BluetoothEventSubscription,
+} from 'react-native-bluetooth-classic';
 // import { connect, ConnectedProps } from 'react-redux';
 // import { RootState } from 'redux/store/store';
 // import { setDeviceAddress } from 'redux/slices/deviceSlice';
 // import { getDeviceAddress } from 'redux/selectors/selector';
-import { Box, Button, Text } from 'native-base';
+import { Box, Spinner, Text, Toast } from 'native-base';
 import { connector, PropsFromRedux } from './connector';
+import { State } from './WifiSettings.types';
+import { checkBluetooth } from 'screens/BluetoothSettings/helper';
+import WifiForm from './components/WifiForm/WifiForm';
+import { WifiFormValues } from './components/WifiForm/WifiForm.types';
 
 interface Props extends PropsFromRedux {}
 
-class WifiSettings extends React.Component<Props, {}> {
+enum WifiRequst {
+  GetWIFIData = 'getWIFIData',
+  SetWIFIData = 'setWIFIData',
+}
+
+class WifiSettings extends React.Component<Props, State> {
+  readSubscription: BluetoothEventSubscription | null = null;
+
   constructor(props: Props) {
     super(props);
+
+    this.state = {
+      isLoading: false,
+      networks: [],
+    };
   }
-  // componentDidMount = async () => {
-  //   const connected = await RNBluetoothClassic.getConnectedDevice();
-  //   console.log('connected', connected);
-  // };
-  // this.readSubscription = foundedDevice.onDataReceived(response => {
-  //   try {
-  //     const receivedData = JSON.parse(response.data);
-  //     if (receivedData.request !== 'getWIFIData') {
-  //       return;
-  //     }
 
-  //     let networks = receivedData.data;
-  //     const connectedNetwork = receivedData.router;
-  //     networks = getArrWithConnNetwork(networks, connectedNetwork);
+  async componentDidMount() {
+    try {
+      await checkBluetooth();
 
-  //     if (networks?.length) {
-  //       console.log('networks', networks);
+      if (!this.props.deviceAddress?.length) {
+        throw new Error('Device is not set');
+      }
 
-  //       // this.setState({
-  //       //   networks,
-  //       //   network: networks[0],
-  //       //   activity: false,
-  //       // });
-  //     }
-  //   } finally {
-  //   }
-  //   console.log('data', response);
-  // });
+      this.setState({ isLoading: true });
 
-  // console.log('founded', foundedDevice);
+      const connectedDevice = await RNBluetoothClassic.getConnectedDevice(
+        this.props.deviceAddress,
+      );
 
-  // const data = {
-  //   request: 'getWIFIData',
-  // };
+      this.readSubscription = connectedDevice.onDataReceived(response => {
+        try {
+          const receivedData = JSON.parse(response.data);
+          if (receivedData.request !== WifiRequst.GetWIFIData) {
+            return;
+          }
 
-  // const sent = await foundedDevice?.write(JSON.stringify(data), 'utf-8');
+          let networks = receivedData.data;
 
-  // if (sent) {
-  //   console.log('sentSuccess');
-  // }
+          if (networks?.length) {
+            this.setState({
+              networks,
+            });
+          }
+        } catch (error) {
+          Toast.show({
+            title: (error as Error).message,
+            status: 'error',
+          });
+          // eslint-disable-next-line no-console
+          console.log((error as Error).message);
+        }
+      });
+
+      const data = {
+        request: WifiRequst.GetWIFIData,
+      };
+
+      connectedDevice.write(JSON.stringify(data), 'utf-8');
+    } catch (error) {
+      // TODO move to utils
+      Toast.show({
+        title: (error as Error).message,
+        status: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
+    } finally {
+      this.setState({
+        isLoading: false,
+      });
+    }
+  }
+
+  onConnect = async (wifiFormValues: WifiFormValues) => {
+    const data = {
+      request: WifiRequst.SetWIFIData,
+      network: wifiFormValues.network,
+      password: wifiFormValues.password,
+    };
+
+    if (!this.props.deviceAddress) {
+      Toast.show({
+        title: 'Не підключено до ферми',
+        status: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log('Не підключено до ферми');
+      return;
+    }
+
+    const connectedDevice = await RNBluetoothClassic.getConnectedDevice(
+      this.props.deviceAddress,
+    );
+
+    connectedDevice.write(JSON.stringify(data), 'utf-8');
+    //     this.props.onChangeActivity(true);
+    //     this.setState({
+    //       routerPassword: '',
+    //     });
+  };
+
+  onRefresh = async () => {
+    await checkBluetooth();
+
+    if (!this.props.deviceAddress?.length) {
+      throw new Error('Device is not set');
+    }
+
+    const connectedDevice = await RNBluetoothClassic.getConnectedDevice(
+      this.props.deviceAddress,
+    );
+
+    const data = {
+      request: WifiRequst.GetWIFIData,
+    };
+
+    connectedDevice.write(JSON.stringify(data), 'utf-8');
+  };
+
+  componentWillUnmount() {
+    this.readSubscription?.remove();
+  }
+
   render() {
     return (
       <Box>
+        {this.state.isLoading ? <Spinner size="lg" /> : null}
         <Text>Address: {this.props.deviceAddress}</Text>
-        <Button onPress={() => this.props.setDeviceAddress('1234:1234')}>
-          Set state
-        </Button>
+        <WifiForm
+          onRefresh={this.onRefresh}
+          onConnect={this.onConnect}
+          networks={['onenetwork']}
+        />
+        <Text>Info</Text>
       </Box>
     );
   }
