@@ -18,6 +18,12 @@ export const requestAccessFineLocationPermission = async () => {
 };
 
 export const checkBluetooth = async () => {
+  let isBluetoothAvailable = await RNBluetoothClassic.isBluetoothAvailable();
+
+  if (!isBluetoothAvailable) {
+    throw new Error('Bluetooth is not available on this device');
+  }
+
   let granted = await requestAccessFineLocationPermission();
 
   if (!granted) {

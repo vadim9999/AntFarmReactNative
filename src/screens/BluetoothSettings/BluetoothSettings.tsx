@@ -3,9 +3,9 @@ import React from 'react';
 import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { ScanFormValues } from './components/ScanForm/ScanForm.types';
-import { Props, State } from './BluetoothSettings.types';
+import { BluetoothSettingsProps, State } from './BluetoothSettings.types';
 import { checkBluetooth } from './helper';
-import { connector, PropsFromRedux } from './connector';
+import { connector } from './connector';
 
 const mockDevices = [
   {
@@ -13,8 +13,6 @@ const mockDevices = [
     address: '12:12',
   },
 ];
-
-type BluetoothSettingsProps = Props & PropsFromRedux;
 
 class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
   constructor(props: BluetoothSettingsProps) {
@@ -26,34 +24,28 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
     };
   }
 
-  async componentDidUpdate(prevProps: BluetoothSettingsProps) {
-    // NOTE needs for first automated start discovering
-    if (
-      prevProps.isBluetoothAvailable !== this.props.isBluetoothAvailable &&
-      this.props.isBluetoothAvailable
-    ) {
-      try {
-        // eslint-disable-next-line react/no-did-update-set-state
-        this.setState({ isLoading: true });
+  async componentDidMount() {
+    try {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ isLoading: true });
 
-        await checkBluetooth();
+      await checkBluetooth();
 
-        RNBluetoothClassic.startDiscovery().then(devices => {
-          this.setState({
-            devices,
-          });
+      RNBluetoothClassic.startDiscovery().then(devices => {
+        this.setState({
+          devices,
         });
-      } catch (error) {
-        Toast.show({
-          title: (error as Error).message,
-          status: 'error',
-        });
-        // eslint-disable-next-line no-console
-        console.log((error as Error).message);
-      } finally {
-        // eslint-disable-next-line react/no-did-update-set-state
-        this.setState({ isLoading: false });
-      }
+      });
+    } catch (error) {
+      Toast.show({
+        title: (error as Error).message,
+        status: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
+    } finally {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ isLoading: false });
     }
   }
 
@@ -98,10 +90,6 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
         isLoading: true,
       });
 
-      if (!this.props.isBluetoothAvailable) {
-        throw new Error('Bluetooth is not available on this device');
-      }
-
       await checkBluetooth();
 
       RNBluetoothClassic.startDiscovery().then(devices => {
@@ -131,9 +119,6 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
     return (
       <>
         <Box>
-          {this.props.isBluetoothAvailable ? null : (
-            <Text>Bluetooth на цьому пристрої не доступний</Text>
-          )}
           <Text>Підключено до мурашиної ферми</Text>
         </Box>
         {this.state.isLoading ? <Spinner size="lg" /> : null}
