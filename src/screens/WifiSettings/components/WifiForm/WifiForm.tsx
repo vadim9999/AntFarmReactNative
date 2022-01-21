@@ -7,9 +7,16 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
     super(props);
 
     this.state = {
-      network: null,
+      network: props.initialValues.network,
       password: null,
     };
+  }
+
+  componentDidUpdate(prevProps: WifiFormProps) {
+    if (prevProps.initialValues.network !== this.props.initialValues.network) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ network: this.props.initialValues.network });
+    }
   }
 
   onSubmit = () => {
@@ -25,6 +32,8 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
       network: this.state.network,
       password: this.state.password,
     });
+
+    this.setState({ password: null });
   };
 
   render() {
@@ -40,15 +49,11 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
             Виберіть точку доступу WIFI
           </FormControl.Label>
           <Select
-            // minWidth="100"
-            // maxWidth="200"
             accessibilityLabel="Виберіть WIFI"
-            placeholder="Network1"
-            // selectedValue={this.props.deviceAddress}
-            // TODO move into class fanction
-            // onValueChange={itemValue => {
-            //   this.props.setBluetoothDevice(itemValue);
-            // }}
+            selectedValue={this.state.network ?? undefined}
+            onValueChange={itemValue => {
+              this.setState({ network: itemValue });
+            }}
             _selectedItem={{
               bg: 'teal.600',
               endIcon: <CheckIcon size={5} />,
@@ -62,12 +67,20 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
             ))}
           </Select>
         </FormControl>
-        <FormControl isInvalid={!this.state.password}>
+        <FormControl mt="2" isInvalid={!this.state.password}>
           <FormControl.Label>Введіть пароль від WIFI</FormControl.Label>
-          <Input type="password" />
+          <Input
+            value={this.state.password ?? undefined}
+            onChangeText={value => this.setState({ password: value })}
+            type="password"
+          />
         </FormControl>
-        <Button>Оновити список</Button>
-        <Button onPress={this.onSubmit}>Підключитися</Button>
+        <Button mt="4" onPress={this.props.onRefresh}>
+          Оновити список
+        </Button>
+        <Button mt="2" onPress={this.onSubmit}>
+          Підключитися
+        </Button>
       </>
     );
   }

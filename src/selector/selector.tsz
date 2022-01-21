@@ -80,19 +80,7 @@ function getThis(that) {
 }
 
 // TODO change name from conn to connection
-function getArrWithConnNetwork(networks, connectedNetwork) {
-  if (connectedNetwork !== '') {
-    var index = networks.indexOf(connectedNetwork);
-    if (index > 0) {
-      var tmp = networks[0];
-      networks[0] = networks[index] + ' підключено';
-      networks[index] = tmp;
-    } else if (index == 0) {
-      networks[0] += ' підключено';
-    }
-  }
-  return networks;
-}
+
 
 export {
   init,

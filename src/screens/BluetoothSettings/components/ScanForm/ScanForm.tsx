@@ -38,8 +38,11 @@ export default class ScanForm extends React.Component<Props, State> {
             deviceAddress={this.state.form.deviceAddress}
           />
         </FormControl>
-        <Button onPress={this.props.onRefresh}>Оновити список</Button>
+        <Button mt="4" onPress={this.props.onRefresh}>
+          Оновити список
+        </Button>
         <Button
+          mt="2"
           onPress={this.onSubmit}
           // TODO add second check if bluetooth is now available
           disabled={!this.state.form.deviceAddress}>

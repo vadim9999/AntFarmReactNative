@@ -2,6 +2,7 @@ export interface WifiFormProps {
   networks: string[];
   onConnect: (wifiFormValues: WifiFormValues) => void;
   onRefresh: () => void;
+  initialValues: { network: string | null };
 }
 
 export interface WifiFormState {

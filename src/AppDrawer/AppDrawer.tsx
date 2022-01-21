@@ -7,12 +7,26 @@ import CustomDrawerContent from './CustomDrawerContent/CustomDrawerContent';
 import BluetoothSettings from 'screens/BluetoothSettings/BluetoothSettings';
 import WifiSettings from 'screens/WifiSettings/WifiSettings';
 import { AppDrawerProps } from './AppDrawer.types';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { errorToast } from 'utils/errorToast';
 
 const Drawer = createDrawerNavigator();
 
 class AppDrawer extends React.Component<AppDrawerProps, {}> {
   constructor(props: AppDrawerProps) {
     super(props);
+  }
+
+  async componentWillUnmount() {
+    try {
+      const connectedDevices = await RNBluetoothClassic.getConnectedDevices();
+
+      connectedDevices.forEach(connectedDevice => {
+        connectedDevice.disconnect();
+      });
+    } catch (error) {
+      errorToast(error);
+    }
   }
 
   render() {
