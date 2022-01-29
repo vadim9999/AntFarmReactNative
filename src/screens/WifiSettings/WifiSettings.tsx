@@ -13,6 +13,7 @@ import { checkBluetooth } from 'screens/BluetoothSettings/helper';
 import WifiForm from './components/WifiForm/WifiForm';
 import { WifiFormValues } from './components/WifiForm/WifiForm.types';
 import { errorToast } from 'utils/errorToast';
+import styles from './styles';
 
 interface Props extends PropsFromRedux {}
 
@@ -71,7 +72,7 @@ class WifiSettings extends React.Component<Props, State> {
               case WifiRequst.SetWIFIData:
                 if (
                   !receivedData.ipAddress ||
-                  receivedData.ipAddress === 'FAIL'
+                  ['FAIL', 'NONE'].includes(receivedData.ipAddress)
                 ) {
                   Toast.show({
                     title: 'Помилка підключення',
@@ -201,10 +202,7 @@ class WifiSettings extends React.Component<Props, State> {
     return (
       <Center mt="10">
         {this.state.isLoading ? (
-          <HStack
-            style={{
-              position: 'absolute',
-            }}>
+          <HStack style={styles.spinnerContainer}>
             <Spinner size="lg" />
           </HStack>
         ) : null}
@@ -216,7 +214,9 @@ class WifiSettings extends React.Component<Props, State> {
             initialValues={{ network: this.state.connectedNetwork }}
           />
         </VStack>
-        <Text mt="4">IP Address: {this.state.ipAddress}</Text>
+        {this.state.ipAddress ? (
+          <Text mt="4">IP Address: {this.state.ipAddress}</Text>
+        ) : null}
       </Center>
     );
   }
