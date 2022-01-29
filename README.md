@@ -38,6 +38,10 @@ MYAPP_RELEASE_STORE_PASSWORD=****
 MYAPP_RELEASE_KEY_PASSWORD=****
 ```
 
+```
+cd android
+./gradlew bundleRelease
+```
 Easy bluetooth classic - a library that is designed to interact with devices via Bluetooth. It's key features are: Search for Bluetooth devices, connect to them, receive and transfer data. To use it, you need Android version not lower than 4.1 and React Native not lower than 0.40.0.
 NativeBase is a mobile application development system that allows developers to use React Native to create their own mobile applications running on major mobile platforms - Apple iOS and Google Android. Stack of application components is built using its own components of the interface. NativeBase focuses specifically on the look and feel of the interface of the application.
 React Navigation extends the React Native framework. His main goal is to improve navigation. It is completely written in javascript.
