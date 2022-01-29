@@ -1,4 +1,4 @@
-import { Center, HStack, Spinner, Text, Toast, VStack } from 'native-base';
+import { Center, HStack, Text, Toast, VStack } from 'native-base';
 import React from 'react';
 import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
@@ -7,7 +7,7 @@ import { BluetoothSettingsProps, State } from './BluetoothSettings.types';
 import { checkBluetooth } from './helper';
 import { connector } from './connector';
 import { errorToast } from 'utils/errorToast';
-import styles from './styles';
+import Spinner from 'copmonents/Spinner/Spinner';
 
 class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
   constructor(props: BluetoothSettingsProps) {
@@ -105,27 +105,26 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
     }));
 
     return (
-      <Center mt="10">
-        <HStack>
-          {this.props.deviceAddress ? (
-            <Text>Підключено до мурашиної ферми</Text>
-          ) : (
-            <Text>Підключення з мурашиною фермою відсутнє</Text>
-          )}
-        </HStack>
-        {this.state.isLoading ? (
-          <HStack style={styles.spinnerContainer}>
-            <Spinner size="lg" />
+      <>
+        {!this.state.isLoading ? <Spinner /> : null}
+        <Center mt="10">
+          <HStack>
+            {this.props.deviceAddress ? (
+              <Text>Підключено до мурашиної ферми</Text>
+            ) : (
+              <Text>Підключення з мурашиною фермою відсутнє</Text>
+            )}
           </HStack>
-        ) : null}
-        <VStack mt="4" width="90%">
-          <ScanForm
-            onRefresh={this.onScan}
-            onConnect={this.onConnect}
-            devices={deviceList}
-          />
-        </VStack>
-      </Center>
+
+          <VStack mt="4" width="90%">
+            <ScanForm
+              onRefresh={this.onScan}
+              onConnect={this.onConnect}
+              devices={deviceList}
+            />
+          </VStack>
+        </Center>
+      </>
     );
   }
 }

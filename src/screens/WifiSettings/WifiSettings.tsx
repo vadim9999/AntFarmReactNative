@@ -6,14 +6,14 @@ import RNBluetoothClassic, {
 // import { RootState } from 'redux/store/store';
 // import { setDeviceAddress } from 'redux/slices/deviceSlice';
 // import { getDeviceAddress } from 'redux/selectors/selector';
-import { HStack, Center, Spinner, Text, Toast, VStack } from 'native-base';
+import { Center, Text, Toast, VStack } from 'native-base';
 import { connector, PropsFromRedux } from './connector';
 import { ReceivedData, State, WifiRequst } from './WifiSettings.types';
 import { checkBluetooth } from 'screens/BluetoothSettings/helper';
 import WifiForm from './components/WifiForm/WifiForm';
 import { WifiFormValues } from './components/WifiForm/WifiForm.types';
 import { errorToast } from 'utils/errorToast';
-import styles from './styles';
+import Spinner from 'copmonents/Spinner/Spinner';
 
 interface Props extends PropsFromRedux {}
 
@@ -200,24 +200,22 @@ class WifiSettings extends React.Component<Props, State> {
 
   render() {
     return (
-      <Center mt="10">
-        {this.state.isLoading ? (
-          <HStack style={styles.spinnerContainer}>
-            <Spinner size="lg" />
-          </HStack>
-        ) : null}
-        <VStack width="90%">
-          <WifiForm
-            onRefresh={this.onRefresh}
-            onConnect={this.onConnect}
-            networks={this.state.networks}
-            initialValues={{ network: this.state.connectedNetwork }}
-          />
-        </VStack>
-        {this.state.ipAddress ? (
-          <Text mt="4">IP Address: {this.state.ipAddress}</Text>
-        ) : null}
-      </Center>
+      <>
+        {this.state.isLoading ? <Spinner /> : null}
+        <Center mt="10">
+          <VStack width="90%">
+            <WifiForm
+              onRefresh={this.onRefresh}
+              onConnect={this.onConnect}
+              networks={this.state.networks}
+              initialValues={{ network: this.state.connectedNetwork }}
+            />
+          </VStack>
+          {this.state.ipAddress ? (
+            <Text mt="4">IP Address: {this.state.ipAddress}</Text>
+          ) : null}
+        </Center>
+      </>
     );
   }
 }
