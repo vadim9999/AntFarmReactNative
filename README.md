@@ -28,16 +28,6 @@ In app you can connect to Ant Farm via bluetooth.
 run reactotron in desktop
 
 
-Creation build
-create in .gradle/gradle.properties and put there
-
-```
-MYAPP_RELEASE_STORE_FILE=[filename].keystore
-MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-MYAPP_RELEASE_STORE_PASSWORD=****
-MYAPP_RELEASE_KEY_PASSWORD=****
-```
-
 ```
 cd android
 ./gradlew bundleRelease
