@@ -35,7 +35,7 @@ class WifiSettings extends React.Component<Props, State> {
         await checkBluetooth();
 
         if (!this.props.deviceAddress?.length) {
-          throw new Error('Device is not set');
+          throw new Error('Не підключено до мурашиної ферми');
         }
 
         const connectedDevice = await RNBluetoothClassic.getConnectedDevice(

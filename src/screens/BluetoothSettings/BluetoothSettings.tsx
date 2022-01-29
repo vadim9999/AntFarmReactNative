@@ -62,7 +62,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
         );
 
         if (!foundedDevice) {
-          throw new Error('Device not found');
+          throw new Error('Не підключено до мурашиної ферми');
         }
 
         const isConnectedToAntFarm = await foundedDevice.connect({
