@@ -9,7 +9,10 @@ export const store = configureStore({
   },
   // TODO fix this problem
   // @ts-ignore
-  enhancers: [ReactotronConfig?.createEnhancer()],
+  ...(ReactotronConfig
+    ? // @ts-ignore
+      { enhancers: [ReactotronConfig?.createEnhancer()] }
+    : {}),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
