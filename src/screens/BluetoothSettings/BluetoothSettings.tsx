@@ -1,4 +1,13 @@
-import { Center, HStack, Text, Toast, VStack } from 'native-base';
+import {
+  Box,
+  Center,
+  Flex,
+  HStack,
+  Icon,
+  Text,
+  Toast,
+  VStack,
+} from 'native-base';
 import React from 'react';
 import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
@@ -8,6 +17,8 @@ import { checkBluetooth } from './helper';
 import { connector } from './connector';
 import { errorToast } from 'utils/errorToast';
 import Spinner from 'copmonents/Spinner/Spinner';
+import styles from './styles';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
   constructor(props: BluetoothSettingsProps) {
@@ -110,9 +121,27 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
         <Center mt="10">
           <HStack>
             {this.props.deviceAddress ? (
-              <Text>Підключено до мурашиної ферми</Text>
+              <Box style={styles.messageBoxSuccess}>
+                <Flex direction="row" alignItems="center">
+                  <Icon
+                    color="green.500"
+                    size="8"
+                    as={<MaterialCommunityIcons name="check" />}
+                  />
+                  <Text>Підключено до мурашиної ферми</Text>
+                </Flex>
+              </Box>
             ) : (
-              <Text>Підключення з мурашиною фермою відсутнє</Text>
+              <Box style={styles.messageBoxError}>
+                <Flex direction="row" alignItems="center">
+                  <Icon
+                    color="red.500"
+                    size="8"
+                    as={<MaterialCommunityIcons name="alert-circle" />}
+                  />
+                  <Text>Підключення з мурашиною фермою відсутнє</Text>
+                </Flex>
+              </Box>
             )}
           </HStack>
 
