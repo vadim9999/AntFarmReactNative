@@ -1,6 +1,5 @@
 import React from 'react';
-import AboutApplication from 'screens/aboutApplication/AboutApplication';
-// import MainScreen from 'screens/main/MainScreen';
+import AboutApplication from 'screens/AboutApplication/AboutApplication';
 import { Box } from 'native-base';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent/CustomDrawerContent';
