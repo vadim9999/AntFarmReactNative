@@ -1,4 +1,4 @@
-import { DeviceList } from '../DevicePicker/DevicePicker.types';
+import { DeviceList } from './components/DevicePicker/DevicePicker.types';
 
 export interface ScanFormValues {
   deviceAddress: string;

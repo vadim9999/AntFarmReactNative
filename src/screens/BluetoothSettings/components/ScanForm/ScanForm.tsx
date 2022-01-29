@@ -2,7 +2,7 @@ import React from 'react';
 import { PressableProps } from 'react-native';
 import { Button, FormControl } from 'native-base';
 
-import DevicePicker from '../DevicePicker/DevicePicker';
+import DevicePicker from './components/DevicePicker/DevicePicker';
 
 import { Props, State } from './ScanForm.types';
 
