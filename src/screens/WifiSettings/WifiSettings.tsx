@@ -2,10 +2,6 @@ import React from 'react';
 import RNBluetoothClassic, {
   BluetoothEventSubscription,
 } from 'react-native-bluetooth-classic';
-// import { connect, ConnectedProps } from 'react-redux';
-// import { RootState } from 'redux/store/store';
-// import { setDeviceAddress } from 'redux/slices/deviceSlice';
-// import { getDeviceAddress } from 'redux/selectors/selector';
 import { Center, Text, Toast, VStack } from 'native-base';
 import { connector, PropsFromRedux } from './connector';
 import { ReceivedData, State, WifiRequst } from './WifiSettings.types';
@@ -121,7 +117,7 @@ class WifiSettings extends React.Component<Props, State> {
           request: WifiRequst.GetWIFIData,
         };
 
-        connectedDevice.write(JSON.stringify(data), 'utf-8');
+        await connectedDevice.write(JSON.stringify(data), 'utf-8');
       } catch (error) {
         errorToast(error);
       } finally {
@@ -185,7 +181,7 @@ class WifiSettings extends React.Component<Props, State> {
           request: WifiRequst.GetWIFIData,
         };
 
-        connectedDevice.write(JSON.stringify(data), 'utf-8');
+        await connectedDevice.write(JSON.stringify(data), 'utf-8');
       } catch (error) {
         errorToast(error);
       } finally {
