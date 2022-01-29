@@ -1,4 +1,5 @@
-import { Button, CheckIcon, FormControl, Input, Select } from 'native-base';
+import InputPassword from 'copmonents/InputPassword/InputPassword';
+import { Button, CheckIcon, FormControl, Select } from 'native-base';
 import React, { Component } from 'react';
 import { WifiFormProps, WifiFormState } from './WifiForm.types';
 
@@ -69,10 +70,9 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
         </FormControl>
         <FormControl mt="2" isInvalid={!this.state.password}>
           <FormControl.Label>Введіть пароль від WIFI</FormControl.Label>
-          <Input
+          <InputPassword
             value={this.state.password ?? undefined}
             onChangeText={value => this.setState({ password: value })}
-            type="password"
           />
         </FormControl>
         <Button mt="4" onPress={this.props.onRefresh}>
