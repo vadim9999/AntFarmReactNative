@@ -106,7 +106,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
 
     return (
       <>
-        {!this.state.isLoading ? <Spinner /> : null}
+        {this.state.isLoading ? <Spinner /> : null}
         <Center mt="10">
           <HStack>
             {this.props.deviceAddress ? (
