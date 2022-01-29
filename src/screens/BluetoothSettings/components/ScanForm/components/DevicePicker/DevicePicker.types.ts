@@ -3,10 +3,10 @@ export interface DeviceList {
   address: string;
 }
 
-export interface Props {
+export interface DevicePickerProps {
   devices: DeviceList[];
   deviceAddress: string;
   setBluetoothDevice: (itemValue: string) => void;
 }
 
-export interface State {}
+export interface DevicePickerState {}

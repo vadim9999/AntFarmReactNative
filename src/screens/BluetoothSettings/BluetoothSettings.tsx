@@ -72,7 +72,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
         });
 
         if (!isConnectedToAntFarm) {
-          throw new Error('Failed to connect');
+          throw new Error('Помилка в підключенні');
         }
 
         this.props.setDeviceAddress(foundedDevice.address);

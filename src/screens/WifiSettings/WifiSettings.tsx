@@ -89,7 +89,6 @@ class WifiSettings extends React.Component<Props, State> {
                 this.setState({
                   ipAddress: receivedData.ipAddress,
                 });
-
                 break;
 
               case WifiRequst.GetIP:
@@ -102,7 +101,6 @@ class WifiSettings extends React.Component<Props, State> {
                 }
 
                 this.setState({ ipAddress: receivedData.ip });
-
                 break;
 
               default:
@@ -170,7 +168,7 @@ class WifiSettings extends React.Component<Props, State> {
         await checkBluetooth();
 
         if (!this.props.deviceAddress?.length) {
-          throw new Error('Device is not set');
+          throw new Error('Не підключено до мурашиної ферми');
         }
 
         const connectedDevice = await RNBluetoothClassic.getConnectedDevice(
@@ -208,7 +206,7 @@ class WifiSettings extends React.Component<Props, State> {
             />
           </VStack>
           {this.state.ipAddress ? (
-            <Text mt="4">IP Address: {this.state.ipAddress}</Text>
+            <Text mt="4">IP Адреса: {this.state.ipAddress}</Text>
           ) : null}
         </Center>
       </>

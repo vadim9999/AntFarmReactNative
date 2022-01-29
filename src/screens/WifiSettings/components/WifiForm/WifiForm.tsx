@@ -21,7 +21,6 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
   }
 
   onSubmit = () => {
-    // TODO  !this.state.network && !this.state.password - not working
     if (!this.state.network) {
       return;
     }

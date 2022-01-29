@@ -7,16 +7,11 @@ if (__DEV__) {
   // @ts-ignore
   reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
     .configure({
-      name: 'AppName',
+      name: 'AntFarm',
     })
-    .useReactNative() // add all built-in react native plugins
+    .useReactNative()
     .use(reactotronRedux())
-    .connect(); // let's connect!
+    .connect();
 }
 
 export default reactotron;
-
-// Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from
-//   .configure() // controls connection & communication settings
-//   .useReactNative() // add all built-in react native plugins
-//   .connect(); // let's connect!
