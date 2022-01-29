@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Spinner, Text, Toast, VStack } from 'native-base';
+import { Center, HStack, Spinner, Text, Toast, VStack } from 'native-base';
 import React from 'react';
 import ScanForm from './components/ScanForm/ScanForm';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
@@ -7,6 +7,7 @@ import { BluetoothSettingsProps, State } from './BluetoothSettings.types';
 import { checkBluetooth } from './helper';
 import { connector } from './connector';
 import { errorToast } from 'utils/errorToast';
+import styles from './styles';
 
 class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
   constructor(props: BluetoothSettingsProps) {
@@ -103,7 +104,6 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
       address: device.address,
     }));
 
-    // const deviceList = mockDevices;
     return (
       <Center mt="10">
         <HStack>
@@ -114,10 +114,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
           )}
         </HStack>
         {this.state.isLoading ? (
-          <HStack
-            style={{
-              position: 'absolute',
-            }}>
+          <HStack style={styles.spinnerContainer}>
             <Spinner size="lg" />
           </HStack>
         ) : null}
@@ -128,9 +125,6 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
             devices={deviceList}
           />
         </VStack>
-        <Box>
-          <Text>Інформація</Text>
-        </Box>
       </Center>
     );
   }
