@@ -69,7 +69,9 @@ export class WifiForm extends Component<WifiFormProps, WifiFormState> {
           </Select>
         </FormControl>
         <FormControl mt="2" isInvalid={!this.state.password}>
-          <FormControl.Label>Введіть пароль від WIFI</FormControl.Label>
+          <FormControl.Label isRequired>
+            Введіть пароль від WIFI
+          </FormControl.Label>
           <InputPassword
             value={this.state.password ?? undefined}
             onChangeText={value => this.setState({ password: value })}
