@@ -128,7 +128,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
                     size="8"
                     as={<MaterialCommunityIcons name="check" />}
                   />
-                  <Text>Підключено до мурашиної ферми</Text>
+                  <Text ml="1">Підключено до мурашиної ферми</Text>
                 </Flex>
               </Box>
             ) : (
@@ -139,7 +139,7 @@ class BluetoothSettings extends React.Component<BluetoothSettingsProps, State> {
                     size="8"
                     as={<MaterialCommunityIcons name="alert-circle" />}
                   />
-                  <Text>Підключення з мурашиною фермою відсутнє</Text>
+                  <Text ml="1">Підключення з мурашиною фермою відсутнє</Text>
                 </Flex>
               </Box>
             )}
