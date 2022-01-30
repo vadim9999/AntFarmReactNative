@@ -7,7 +7,6 @@ export const store = configureStore({
   reducer: {
     device: deviceReducer,
   },
-  // TODO fix this problem
   // @ts-ignore
   ...(ReactotronConfig
     ? // @ts-ignore
