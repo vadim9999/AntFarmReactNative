@@ -27,11 +27,23 @@ In app you can connect to Ant Farm via bluetooth.
 
 run reactotron in desktop
 
+## Making release build:
 
 ```
 cd android
+./gradlew clean
 ./gradlew bundleRelease
 ```
+then going to this `android/app/build/outputs/bundle/release/` path will be available `.aab` file.
+
+
+Run command to install and run release app on device(also this command builds apk file):
+
+```
+npx react-native run-android --variant=release
+```
+Open folder `android/app/build/outputs/apk/release/` and there will be apk file app-release.apk
+
 Easy bluetooth classic - a library that is designed to interact with devices via Bluetooth. It's key features are: Search for Bluetooth devices, connect to them, receive and transfer data. To use it, you need Android version not lower than 4.1 and React Native not lower than 0.40.0.
 NativeBase is a mobile application development system that allows developers to use React Native to create their own mobile applications running on major mobile platforms - Apple iOS and Google Android. Stack of application components is built using its own components of the interface. NativeBase focuses specifically on the look and feel of the interface of the application.
 React Navigation extends the React Native framework. His main goal is to improve navigation. It is completely written in javascript.
