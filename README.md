@@ -11,6 +11,10 @@
 - React Navigation - 6.0.6
 - react-native-vector-icons - 9.0.0
 
+## Screenshots
+
+<img src = "https://github.com/vadim9999/AntFarmReactNative/blob/master/screenshots/release2-1.png"  height="640" width="320" >
+<img src = "https://github.com/vadim9999/AntFarmReactNative/blob/master/screenshots/release2-2.png"  height="640" width="320" >
 
 react-native-bluetooth-classic used to Search for Bluetooth devices, connect to them, receive and transfer data via client and Python server.
 
