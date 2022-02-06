@@ -1,5 +1,8 @@
 # AntFarmReactNative
 
+API: https://github.com/vadim9999/ant-farm-python
+UI: https://github.com/vadim9999/ant-farm-react
+
 **Stack:**
 - React Native - 0.66.4
 - ReactJS - 17.0.2
