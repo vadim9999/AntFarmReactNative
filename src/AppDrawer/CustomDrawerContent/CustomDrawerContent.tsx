@@ -17,7 +17,6 @@ const CustomDrawerContent: DrawerNavigationConfig['drawerContent'] = props => {
     <DrawerContentScrollView {...props}>
       <VStack space="6" my="2" mx="1">
         <Box px="4">
-          {/* TODO add logo here */}
           <Text bold color="gray.700">
             Мурашина ферма
           </Text>

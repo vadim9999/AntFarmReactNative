@@ -1,16 +1,20 @@
-import { View } from 'react-native';
 import React from 'react';
-import styles from './styles';
-import { Container, Text } from 'native-base';
+import { Center, Text, VStack } from 'native-base';
 
 class AboutApplication extends React.Component {
   render() {
     return (
-      <Container>
-        <View style={styles.container}>
-          <Text>Про додаток</Text>
-        </View>
-      </Container>
+      <Center mt="10">
+        <VStack width="95%">
+          <Text>Дипломна робота</Text>
+          <Text>
+            Тема: Розробка програмного забезпечення для моніторингу та
+            управління мурашиною фермою
+          </Text>
+          <Text>Виконав студент групи 121-19зск-1 Путров Вадим Дмитрович</Text>
+          <Text>Керівник дипломного проекту Приходченко Сергій Дмитрович</Text>
+        </VStack>
+      </Center>
     );
   }
 }
